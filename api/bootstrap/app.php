@@ -41,7 +41,7 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-switch ($_SERVER['SERVER_NAME']) {
+switch ($_SERVER['SERVER_NAME'] ?? 'localhost') {
     case 'yappi.jp':
         $app->loadEnvironmentFrom('.env.production');
         break;
