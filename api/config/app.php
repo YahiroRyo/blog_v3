@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\DataBaseQueryServiceProvider::class,
 
         /*
          * Application Service Providers...
