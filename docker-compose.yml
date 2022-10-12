@@ -1,0 +1,49 @@
+version: '3'
+services:
+
+  blog-client:
+    build:
+      context: ./client
+    container_name: blog-client
+    tty: true
+    environment:
+      TZ: "Asia/Tokyo"
+      HOST: "0.0.0.0"
+    volumes:
+      - ./api:/home/client
+    ports:
+      - "3000:3000"
+
+  blog-api:
+    build:
+      context: ./api
+    container_name: blog-api
+    volumes:
+      - ./api:/var/www/html
+      - ./api/bin:/var/www/bin
+    environment:
+      TZ: Asia/Tokyo
+    tty: true
+    command: "sh -c 'bash /var/www/bin/init.sh && apache2-foreground'"
+    ports:
+      - "8000:80"
+    depends_on:
+      - blog-db
+
+  blog-db:
+    build: ./database
+    container_name: blog-db
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./database/mysql/mysql.conf:/etc/mysql/mysql.conf
+      - ./database/mysql/lib:/var/lib/mysql
+      - ./database/mysql/logs:/var/log/database
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Tokyo"
+      LC_ALL: "C.UTF-8"
