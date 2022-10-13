@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Support\Facades\Artisan;
+use Packages\Infrastructure\Eloquent\User\ActiveUser;
 use Packages\Infrastructure\Eloquent\User\User;
 
 abstract class DBSetUpTestCase extends TestCase {
@@ -24,6 +25,7 @@ abstract class DBSetUpTestCase extends TestCase {
                 'email'    => 'login@a.aa',
                 'password' => bcrypt('password')
             ]);
+            ActiveUser::create(['userId' => $user->userId]);
             $this->actingAs($user);
         }
     }
