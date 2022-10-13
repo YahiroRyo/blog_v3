@@ -8,6 +8,7 @@ use Tests\DBSetUpTestCase;
 
 class CreateUserTest extends DBSetUpTestCase {
     protected bool $useSeed = false;
+    protected bool $login   = false;
 
     public function test_ユーザーの作成を行う(): void {
         $password = 'password';
@@ -16,7 +17,7 @@ class CreateUserTest extends DBSetUpTestCase {
             'password'  => $password
         ];
 
-        $response = $this->post('/api/users', $request);
+        $response = $this->post('/users/create', $request);
         $response->assertOk();
 
         $user = User::first();
@@ -36,10 +37,10 @@ class CreateUserTest extends DBSetUpTestCase {
             'password'  => 'password'
         ];
 
-        $response = $this->post('/api/users', $request);
+        $response = $this->post('/users/create', $request);
         $response->assertOk();
 
-        $response = $this->post('/api/users', $request);
+        $response = $this->post('/users/create', $request);
         $response->assertStatus(500);
     }
 }

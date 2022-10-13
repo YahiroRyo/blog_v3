@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Blog\AdminBlogController;
-use App\Http\Controllers\User\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::prefix('/users')->group(function () {
-    Route::post('/', [AdminUserController::class, 'createUser']);
-});
-
-Route::prefix('/blogs')->group(function () {
-    Route::post('/', [AdminBlogController::class, 'createBlog']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('/blogs')->group(function () {
+        Route::post('/', [AdminBlogController::class, 'createBlog']);
+    });
 });
