@@ -6,16 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
     public function up(): void {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('userId');
+        Schema::create('activeBlogs', function (Blueprint $table) {
+            $table->char('blogId', 26)->primary();
 
-            $table->string('email', 255);
-            $table->char('password', 60);
             $table->timestamp('createdAt')->useCurrent();
         });
     }
 
     public function down(): void {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('activeBlogs');
     }
 };
