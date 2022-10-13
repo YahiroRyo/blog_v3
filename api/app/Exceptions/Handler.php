@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Client\ResponseSequence;
+use Packages\Infrastructure\Repositories\Exceptions\User\FailInitUserException;
+use Packages\Infrastructure\Repositories\Exceptions\User\IllegalExistsUserException;
 use Throwable;
 
 class Handler extends ExceptionHandler {
@@ -34,6 +37,24 @@ class Handler extends ExceptionHandler {
         'password',
         'password_confirmation',
     ];
+
+    public function render($request, Throwable $e) {
+        if (!$request->isMethod('GET')) {
+            logs()->error($request->all());
+        }
+
+        if ($e instanceof IllegalExistsUserException) {
+            return response('ユーザーは既に存在しているため、ユーザーの新規作成は行えません。', 500);
+        }
+
+        if ($e instanceof FailInitUserException) {
+            return response('ユーザーの作成に失敗しました。時間をおいてからもう一度お試しください。', 500);
+        }
+
+        logs()->error($e);
+
+        return response('不明なエラーが発生しました。時間をおいてからもう一度お試しください。');
+    }
 
     /**
      * Register the exception handling callbacks for the application.
