@@ -8,7 +8,7 @@ use Packages\Infrastructure\Repositories\Exceptions\User\FailInitUserException;
 use Packages\Infrastructure\Repositories\Exceptions\User\IllegalExistsUserException;
 
 final class InitUserRepository {
-    public function createUser(InitUser $initUser) : void {
+    public function createUser(InitUser $initUser): void {
         $user = DB::selectOne('
             SELECT
                 userId

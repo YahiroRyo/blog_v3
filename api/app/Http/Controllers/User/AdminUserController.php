@@ -13,7 +13,7 @@ class AdminUserController extends Controller {
         $this->initUserService = $initUserService;
     }
 
-    public function createUser(CreateUserRequest $request) : void {
+    public function createUser(CreateUserRequest $request): void {
         $this->initUserService->createUser($request->ofDomain());
     }
 }

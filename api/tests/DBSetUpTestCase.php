@@ -8,7 +8,7 @@ abstract class DBSetUpTestCase extends TestCase {
     protected bool $useRefresh = true;
     protected bool $useSeed    = true;
 
-    public function setUp() : void {
+    public function setUp(): void {
         parent::setUp();
 
         if ($this->useRefresh) {

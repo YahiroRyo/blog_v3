@@ -9,7 +9,7 @@ use Tests\DBSetUpTestCase;
 class CreateUserTest extends DBSetUpTestCase {
     protected bool $useSeed = false;
 
-    public function test_ユーザーの作成を行う() : void {
+    public function test_ユーザーの作成を行う(): void {
         $password = 'password';
         $request  = [
             'email'     => 'a@a.aa',
@@ -30,7 +30,7 @@ class CreateUserTest extends DBSetUpTestCase {
         $this->assertTrue(ActiveUser::find($user->userId)->exists());
     }
 
-    public function test_ユーザーが既に1つ以上作成されていた場合は500を返す() : void {
+    public function test_ユーザーが既に1つ以上作成されていた場合は500を返す(): void {
         $request = [
             'email'     => 'a@a.aa',
             'password'  => 'password'

@@ -12,7 +12,7 @@ return $config->setRiskyAllowed(true)
             'position_after_functions_and_oop_constructs'=>'same'
         ],
         'binary_operator_spaces' => [ 'default' => 'align' ],
-        'return_type_declaration' => ['space_before'=>'one'],
+        'return_type_declaration' => ['space_before'=>'none'],
 
         'phpdoc_separation' => false,
         'phpdoc_align' => [

@@ -12,17 +12,17 @@ use Carbon\Carbon;
 use DateTime;
 
 class DataBaseQueryServiceProvider extends ServiceProvider {
-    private function replaceSQL(string $replacement, string $sql) : string {
+    private function replaceSQL(string $replacement, string $sql): string {
         return preg_replace('/\\?/', $replacement, $sql, 1);
     }
 
-    private function writeLog(string $replacement, $query) : void {
+    private function writeLog(string $replacement, $query): void {
         $sql = $this->replaceSQL($replacement, $query->sql);
         logs()->debug('SQL', ['sql' => $sql, 'time' => "{$query->time} ms"]);
     }
 
-    public function register() : void {
-        DB::listen(function ($query) : void {
+    public function register(): void {
+        DB::listen(function ($query): void {
             foreach ($query->bindings as $binding) {
                 if (is_string($binding)) {
                     $this->writeLog("'{$binding}'", $query);
@@ -56,19 +56,19 @@ class DataBaseQueryServiceProvider extends ServiceProvider {
             }
         });
 
-        Event::listen(TransactionBeginning::class, function (TransactionBeginning $event) : void {
+        Event::listen(TransactionBeginning::class, function (TransactionBeginning $event): void {
             logs()->debug('SQL START TRANSACTION');
         });
 
-        Event::listen(TransactionCommitted::class, function (TransactionCommitted $event) : void {
+        Event::listen(TransactionCommitted::class, function (TransactionCommitted $event): void {
             logs()->debug('SQL COMMIT');
         });
 
-        Event::listen(TransactionRolledBack::class, function (TransactionRolledBack $event) : void {
+        Event::listen(TransactionRolledBack::class, function (TransactionRolledBack $event): void {
             logs()->debug('SQL ROLLBACK');
         });
     }
 
-    public function boot() : void {
+    public function boot(): void {
     }
 }

@@ -18,11 +18,11 @@ abstract class StringLengthLimit {
         $this->value = $value ?? '';
     }
 
-    public function value() : string {
+    public function value(): string {
         return $this->value;
     }
 
-    public static function of($value) : StringLengthLimit {
+    public static function of($value): StringLengthLimit {
         return new static($value);
     }
 }

@@ -10,11 +10,11 @@ abstract class Identifer {
         $this->value = $value;
     }
 
-    public function value() : string {
+    public function value(): string {
         return $this->value;
     }
 
-    public static function of(int $value) : Identifer {
+    public static function of(int $value): Identifer {
         return new static($value);
     }
 }

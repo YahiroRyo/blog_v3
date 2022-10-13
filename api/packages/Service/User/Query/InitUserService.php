@@ -12,7 +12,7 @@ final class InitUserService {
         $this->initUserRepository = $initUserRepository;
     }
 
-    public function createUser(InitUser $initUser) : void {
+    public function createUser(InitUser $initUser): void {
         $this->initUserRepository->createUser($initUser);
     }
 }

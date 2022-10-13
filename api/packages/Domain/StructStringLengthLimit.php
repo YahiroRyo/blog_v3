@@ -18,11 +18,11 @@ abstract class StructStringLengthLimit {
         $this->value = $value;
     }
 
-    public function value() : string {
+    public function value(): string {
         return $this->value;
     }
 
-    public static function of($value) : StructStringLengthLimit {
+    public static function of($value): StructStringLengthLimit {
         return new static($value);
     }
 }
