@@ -4,29 +4,28 @@ namespace Packages\Domain;
 
 use Illuminate\Support\Facades\Validator;
 
-abstract class StringLengthLimit {
+abstract class Url {
     protected string $value;
 
     protected string $name;
-    protected int $lengthLimit;
 
     private function __construct($value) {
         Validator::make(
             [$this->name => $value],
-            [$this->name => ["max:{$this->lengthLimit}"]],
+            [$this->name => ["url"]],
             [
-                'max'       => ':attributeは:max文字以下である必要があります',
+                'url'       => ':attributeはURLである必要があります',
             ]
         )->validate();
 
-        $this->value = $value ?? '';
+        $this->value = $value;
     }
 
     public function value(): string {
         return $this->value;
     }
 
-    public static function of($value): StringLengthLimit {
+    public static function of($value): Url {
         return new static($value);
     }
 }

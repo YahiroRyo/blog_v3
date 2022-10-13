@@ -4,6 +4,7 @@ namespace Packages\Domain;
 
 abstract class Identifer {
     protected int $value;
+
     protected string $name;
 
     private function __construct(int $value) {

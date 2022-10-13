@@ -5,6 +5,7 @@ namespace Packages\Infrastructure\Eloquent\Blog;
 use Database\Factories\Blog\BlogFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Blog extends Model {
     use HasFactory;
@@ -19,6 +20,10 @@ class Blog extends Model {
     protected $fillable   = [
         'blogId',
     ];
+
+    public function content(): HasOne {
+        return $this->hasOne(BlogContent::class, 'blogId', 'blogId');
+    }
 
     protected static function newFactory(): BlogFactory {
         return new BlogFactory();

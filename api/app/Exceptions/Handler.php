@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Client\ResponseSequence;
+use Illuminate\Validation\ValidationException;
+use Packages\Infrastructure\Repositories\Exceptions\Blog\FailCreateBlogException;
 use Packages\Infrastructure\Repositories\Exceptions\User\FailInitUserException;
 use Packages\Infrastructure\Repositories\Exceptions\User\IllegalExistsUserException;
 use Throwable;
@@ -49,6 +51,14 @@ class Handler extends ExceptionHandler {
 
         if ($e instanceof FailInitUserException) {
             return response('ユーザーの作成に失敗しました。時間をおいてからもう一度お試しください。', 500);
+        }
+
+        if ($e instanceof FailCreateBlogException) {
+            return response('ブログの作成に失敗しました。時間をおいてからもう一度お試しください。', 500);
+        }
+
+        if ($e instanceof ValidationException) {
+            return response($e->errors(), 400);
         }
 
         logs()->error($e);

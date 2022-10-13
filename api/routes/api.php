@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Blog\AdminBlogController;
 use App\Http\Controllers\User\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/users')->group(function () {
     Route::post('/', [AdminUserController::class, 'createUser']);
+});
+
+Route::prefix('/blogs')->group(function () {
+    Route::post('/', [AdminBlogController::class, 'createBlog']);
 });
