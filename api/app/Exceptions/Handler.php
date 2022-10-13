@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Validation\ValidationException;
@@ -43,6 +44,10 @@ class Handler extends ExceptionHandler {
     public function render($request, Throwable $e) {
         if (!$request->isMethod('GET')) {
             logs()->error($request->all());
+        }
+
+        if ($e instanceof AuthenticationException) {
+            return response('認証に失敗しました。', 400);
         }
 
         if ($e instanceof IllegalExistsUserException) {
