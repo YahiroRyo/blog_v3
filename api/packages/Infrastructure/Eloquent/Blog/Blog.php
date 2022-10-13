@@ -19,6 +19,8 @@ class Blog extends Model {
     protected $primaryKey = 'blogId';
     protected $fillable   = [
         'blogId',
+        'createdAt',
+        'updatedAt'
     ];
 
     public function content(): HasOne {
