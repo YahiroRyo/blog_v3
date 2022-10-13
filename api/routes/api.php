@@ -21,5 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/blogs')->group(function () {
         Route::post('/', [AdminBlogController::class, 'createBlog']);
+        Route::put('/', [AdminBlogController::class, 'editBlog']);
+        Route::put('/mainImage', [AdminBlogController::class, 'editBlogMainImage']);
     });
 });
