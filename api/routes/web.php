@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/users')->group(function () {
+    Route::post('/create', [AdminUserController::class, 'createUser'])->name('register');
+    Route::post('/login', [AdminUserController::class, 'login'])->name('login');
+    Route::post('/logout', [AdminUserController::class, 'logout'])->name('logout');
 });
