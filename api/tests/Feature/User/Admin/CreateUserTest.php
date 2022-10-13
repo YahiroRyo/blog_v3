@@ -29,4 +29,17 @@ class CreateUserTest extends DBSetUpTestCase {
         $this->assertTrue(password_verify($password, $user->password));
         $this->assertTrue(ActiveUser::find($user->userId)->exists());
     }
+
+    public function test_ユーザーが既に1つ以上作成されていた場合は500を返す() : void {
+        $request = [
+            'email'     => 'a@a.aa',
+            'password'  => 'password'
+        ];
+
+        $response = $this->post('/api/users', $request);
+        $response->assertOk();
+
+        $response = $this->post('/api/users', $request);
+        $response->assertStatus(500);
+    }
 }
