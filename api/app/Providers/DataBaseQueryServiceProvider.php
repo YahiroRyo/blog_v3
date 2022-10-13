@@ -12,63 +12,62 @@ use Carbon\Carbon;
 use DateTime;
 
 class DataBaseQueryServiceProvider extends ServiceProvider {
-    private function replaceSQL(string $replacement, string $sql) : string {
+    private function replaceSQL(string $replacement, string $sql): string {
         return preg_replace('/\\?/', $replacement, $sql, 1);
     }
 
-    private function writeLog(string $replacement, $query) : void {
-        $sql = $this->replaceSQL($replacement, $query->sql);
-        logs()->debug('SQL', ['sql' => $sql, 'time' => "{$query->time} ms"]);
-    }
+    public function register(): void {
+        DB::listen(function ($query): void {
+            $sql = $query->sql;
 
-    public function register() : void {
-        DB::listen(function ($query) : void {
             foreach ($query->bindings as $binding) {
                 if (is_string($binding)) {
-                    $this->writeLog("'{$binding}'", $query);
-                    return;
+                    $sql = $this->replaceSQL("'{$binding}'", $sql);
+                    continue;
                 }
 
                 if (is_bool($binding)) {
-                    $this->writeLog($binding ? '1' : '0', $query);
-                    return;
+                    $sql = $this->replaceSQL($binding ? '1' : '0', $sql);
+                    continue;
                 }
 
                 if (is_int($binding)) {
-                    $this->writeLog((string) $binding, $query);
-                    return;
+                    $sql = $this->replaceSQL((string) $binding, $sql);
+                    continue;
                 }
 
                 if ($binding === null) {
-                    $this->writeLog("NULL", $query);
-                    return;
+                    $sql = $this->replaceSQL("NULL", $sql);
+                    continue;
                 }
 
                 if ($binding instanceof Carbon) {
-                    $this->writeLog("'{$binding->toDateTimeString()}'", $query);
-                    return;
+                    $sql = $this->replaceSQL("'{$binding->toDateTimeString()}'", $sql);
+                    continue;
                 }
 
                 if ($binding instanceof DateTime) {
-                    $this->writeLog("'{$binding->format('Y-m-d H:i:s')}'", $query);
-                    return;
+                    $sql = $this->replaceSQL("'{$binding->format('Y-m-d H:i:s')}'", $sql);
+                    continue;
                 }
             }
+
+            logs()->debug('SQL', ['sql' => $sql, 'time' => "{$query->time} ms"]);
         });
 
-        Event::listen(TransactionBeginning::class, function (TransactionBeginning $event) : void {
+        Event::listen(TransactionBeginning::class, function (TransactionBeginning $event): void {
             logs()->debug('SQL START TRANSACTION');
         });
 
-        Event::listen(TransactionCommitted::class, function (TransactionCommitted $event) : void {
+        Event::listen(TransactionCommitted::class, function (TransactionCommitted $event): void {
             logs()->debug('SQL COMMIT');
         });
 
-        Event::listen(TransactionRolledBack::class, function (TransactionRolledBack $event) : void {
+        Event::listen(TransactionRolledBack::class, function (TransactionRolledBack $event): void {
             logs()->debug('SQL ROLLBACK');
         });
     }
 
-    public function boot() : void {
+    public function boot(): void {
     }
 }

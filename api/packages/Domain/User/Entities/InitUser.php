@@ -17,11 +17,11 @@ final class InitUser {
         $this->password = $password;
     }
 
-    public function email() : Email {
+    public function email(): Email {
         return $this->email;
     }
 
-    public function password() : Password {
+    public function password(): Password {
         return $this->password;
     }
 }

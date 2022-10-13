@@ -185,8 +185,10 @@ return [
         /*
          * Package Service Providers...
          */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         App\Providers\DataBaseQueryServiceProvider::class,
-
+        App\Providers\DIServiceProvider::class,
         /*
          * Application Service Providers...
          */

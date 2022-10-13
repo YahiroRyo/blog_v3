@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 
 abstract class StringLengthLimit {
     protected string $value;
+
     protected string $name;
     protected int $lengthLimit;
 
@@ -13,16 +14,19 @@ abstract class StringLengthLimit {
         Validator::make(
             [$this->name => $value],
             [$this->name => ["max:{$this->lengthLimit}"]],
+            [
+                'max'       => ':attributeは:max文字以下である必要があります',
+            ]
         )->validate();
 
         $this->value = $value ?? '';
     }
 
-    public function value() : string {
+    public function value(): string {
         return $this->value;
     }
 
-    public static function of($value) : StringLengthLimit {
+    public static function of($value): StringLengthLimit {
         return new static($value);
     }
 }

@@ -13,8 +13,10 @@ class User extends Authenticatable {
     use HasFactory;
     use Notifiable;
 
-    protected $primaryKey = 'userId';
-    protected $fillable   = [
+    public const CREATED_AT = 'createdAt';
+    public const UPDATED_AT = null;
+    protected $primaryKey   = 'userId';
+    protected $fillable     = [
         'email',
         'password',
     ];
