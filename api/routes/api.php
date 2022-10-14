@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/blogs')->group(function () {
         Route::post('/', [AdminBlogController::class, 'createBlog']);
         Route::put('/', [AdminBlogController::class, 'editBlog']);
+        Route::delete('/', [AdminBlogController::class, 'deleteBlog']);
         Route::put('/mainImage', [AdminBlogController::class, 'editBlogMainImage']);
     });
 });

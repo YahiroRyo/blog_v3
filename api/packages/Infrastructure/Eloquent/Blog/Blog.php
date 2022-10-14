@@ -27,6 +27,10 @@ class Blog extends Model {
         return $this->hasOne(BlogContent::class, 'blogId', 'blogId');
     }
 
+    public function active(): HasOne {
+        return $this->hasOne(ActiveBlog::class, 'blogId', 'blogId');
+    }
+
     protected static function newFactory(): BlogFactory {
         return new BlogFactory();
     }
