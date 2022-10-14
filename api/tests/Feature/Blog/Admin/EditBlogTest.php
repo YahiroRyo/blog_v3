@@ -16,6 +16,7 @@ class EditBlogTest extends DBSetUpTestCase {
             'blogId'    => $blog->blogId,
             'title'     => 'タイトル',
             'body'      => 'ボディー',
+            'isActive'  => false,
         ];
 
         $response = $this->put('/api/blogs', $request);
@@ -24,9 +25,10 @@ class EditBlogTest extends DBSetUpTestCase {
         $blog = Blog::find($blog->blogId);
 
         $this->assertEquals($request, [
-            'blogId' => $blog->blogId,
-            'title'  => $blog->content->title,
-            'body'   => $blog->content->body,
+            'blogId'   => $blog->blogId,
+            'title'    => $blog->content->title,
+            'body'     => $blog->content->body,
+            'isActive' => $blog->active !== null,
         ]);
     }
 }
