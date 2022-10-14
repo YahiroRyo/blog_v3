@@ -10,7 +10,7 @@ services:
       TZ: "Asia/Tokyo"
       HOST: "0.0.0.0"
     volumes:
-      - ./api:/home/client
+      - ./client:/home/client
     ports:
       - "3000:3000"
 
