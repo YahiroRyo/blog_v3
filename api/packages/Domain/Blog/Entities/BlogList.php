@@ -26,7 +26,7 @@ final class BlogList {
             $result[] = [
                 'title'        => $blog->title->value(),
                 'body'         => $blog->body->value(),
-                'thumbnailUrl' => $blog->thumbnailUrl->value(),
+                'thumbnail'    => $blog->thumbnailUrl->value(),
                 'isActive'     => $blog->isActive->value(),
             ];
         }

@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Validation\ValidationException;
@@ -46,6 +47,10 @@ class Handler extends ExceptionHandler {
     public function render($request, Throwable $e) {
         if (!$request->isMethod('GET')) {
             logs()->error($request->all());
+        }
+
+        if ($e instanceof ModelNotFoundException) {
+            return response($e->getMessage(), 404);
         }
 
         if ($e instanceof AuthenticationException) {
