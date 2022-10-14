@@ -1,0 +1,1 @@
+docker compose exec blog-api php artisan test
