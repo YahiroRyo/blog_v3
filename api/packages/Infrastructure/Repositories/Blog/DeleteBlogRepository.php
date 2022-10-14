@@ -2,7 +2,6 @@
 
 namespace Packages\Infrastructure\Repositories\Blog;
 
-use Carbon\Carbon;
 use DB;
 use Packages\Domain\Blog\ValueObjects\BlogId;
 

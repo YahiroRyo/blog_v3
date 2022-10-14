@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/blogs')->group(function () {
+        Route::get('/', [AdminBlogController::class, 'blogList']);
         Route::post('/', [AdminBlogController::class, 'createBlog']);
         Route::put('/', [AdminBlogController::class, 'editBlog']);
         Route::delete('/', [AdminBlogController::class, 'deleteBlog']);
