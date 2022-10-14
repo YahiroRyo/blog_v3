@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Blog\AdminBlogController;
+use App\Http\Controllers\Blog\ClientBlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::prefix('/blogs')->group(function () {
-        Route::get('/', [AdminBlogController::class, 'blogList']);
-        Route::post('/', [AdminBlogController::class, 'createBlog']);
-        Route::put('/', [AdminBlogController::class, 'editBlog']);
-        Route::delete('/', [AdminBlogController::class, 'deleteBlog']);
-        Route::get('/{blogId}', [AdminBlogController::class, 'blog']);
-        Route::put('/mainImage', [AdminBlogController::class, 'editBlogMainImage']);
+    Route::prefix('/admin')->group(function () {
+        Route::prefix('/blogs')->group(function () {
+            Route::get('/', [AdminBlogController::class, 'blogList']);
+            Route::post('/', [AdminBlogController::class, 'createBlog']);
+            Route::put('/', [AdminBlogController::class, 'editBlog']);
+            Route::delete('/', [AdminBlogController::class, 'deleteBlog']);
+            Route::get('/{blogId}', [AdminBlogController::class, 'blog']);
+            Route::put('/mainImage', [AdminBlogController::class, 'editBlogMainImage']);
+        });
     });
+});
+
+Route::prefix('/blogs')->group(function () {
+    Route::get('/', [ClientBlogController::class, 'activeBlogList']);
 });

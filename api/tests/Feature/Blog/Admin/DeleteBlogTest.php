@@ -13,7 +13,7 @@ class DeleteBlogTest extends DBSetUpTestCase {
             'blogId' => $preBlog->blogId,
         ];
 
-        $response = $this->delete('/api/blogs', $request);
+        $response = $this->delete('/api/admin/blogs', $request);
         $response->assertOk();
 
         $this->assertTrue(Blog::find($preBlog->blogId) === null);

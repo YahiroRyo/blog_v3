@@ -22,7 +22,7 @@ class EditBlogMainImageTest extends DBSetUpTestCase {
             'mainImage' => $mainImage,
         ];
 
-        $response = $this->put('/api/blogs/mainImage', $request);
+        $response = $this->put('/api/admin/blogs/mainImage', $request);
         $response->assertOk();
 
         $blog = Blog::with('content')->find($preBlog->blogId);

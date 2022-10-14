@@ -20,7 +20,7 @@ class CreateUserTest extends DBSetUpTestCase {
             'mainImage' => $mainImage,
         ];
 
-        $response = $this->post('/api/blogs', $request);
+        $response = $this->post('/api/admin/blogs', $request);
         $response->assertOk();
 
         unset($request['mainImage']);
