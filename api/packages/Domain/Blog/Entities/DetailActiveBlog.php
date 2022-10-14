@@ -6,7 +6,7 @@ use Packages\Domain\Blog\ValueObjects\Body;
 use Packages\Domain\Blog\ValueObjects\ThumbnailUrl;
 use Packages\Domain\Blog\ValueObjects\Title;
 
-final class ActiveBlog {
+final class DetailActiveBlog {
     private Title $title;
     private Body $body;
     private ThumbnailUrl $thumbnailUrl;
@@ -38,6 +38,7 @@ final class ActiveBlog {
             'title'        => $this->title->value(),
             'body'         => $this->body->value(),
             'thumbnail'    => $this->thumbnailUrl->value(),
+            'mainImage'    => $this->thumbnailUrl->mainImage(),
         ];
     }
 }
