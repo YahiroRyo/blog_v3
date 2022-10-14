@@ -45,7 +45,7 @@ final class Blog {
         return [
             'title'        => $this->title->value(),
             'body'         => $this->body->value(),
-            'thumbnailUrl' => $this->thumbnailUrl->value(),
+            'thumbnail'    => $this->thumbnailUrl->value(),
             'isActive'     => $this->isActive->value(),
         ];
     }
