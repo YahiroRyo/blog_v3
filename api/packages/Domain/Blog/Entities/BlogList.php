@@ -24,10 +24,10 @@ final class BlogList {
 
         foreach ($this->blogList as $blog) {
             $result[] = [
-                'title'        => $blog->title->value(),
-                'body'         => $blog->body->value(),
-                'thumbnail'    => $blog->thumbnailUrl->value(),
-                'isActive'     => $blog->isActive->value(),
+                'title'        => $blog->title()->value(),
+                'body'         => $blog->body()->value(),
+                'thumbnail'    => $blog->thumbnailUrl()->value(),
+                'isActive'     => $blog->isActive()->value(),
             ];
         }
 

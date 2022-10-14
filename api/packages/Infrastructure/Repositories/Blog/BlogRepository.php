@@ -29,7 +29,7 @@ final class BlogRepository {
         ');
 
         foreach ($blogList as $blog) {
-            $result->add(new Blog(
+            $result = $result->add(new Blog(
                 Title::of($blog->title),
                 Body::of($blog->body),
                 ThumbnailUrl::of($blog->thumbnail),
