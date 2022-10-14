@@ -19,7 +19,7 @@ class EditBlogTest extends DBSetUpTestCase {
             'isActive'  => false,
         ];
 
-        $response = $this->put('/api/blogs', $request);
+        $response = $this->put('/api/admin/blogs', $request);
         $response->assertOk();
 
         $blog = Blog::find($blog->blogId);
