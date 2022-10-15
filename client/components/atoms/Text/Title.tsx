@@ -10,6 +10,8 @@ const Title = ({ children }: TitleProps) => {
       style={{
         fontSize: '1.5rem',
         color: color.black,
+        lineHeight: '1.75',
+        margin: '0',
       }}
     >
       {children}
