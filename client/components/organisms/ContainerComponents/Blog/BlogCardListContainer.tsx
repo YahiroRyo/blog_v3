@@ -7,7 +7,7 @@ const BlogCardListContainer = () => {
 
   useEffect(() => {
     const main = async () => {
-      const response = await axios.get('http://localhost:8000/api/blogs');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`);
       setBlogList(response.data);
     };
     main();
