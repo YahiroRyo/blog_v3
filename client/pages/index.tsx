@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import BlogCardListContainer from '../components/organisms/ContainerComponents/Blog/BlogCardListContainer';
+import ActiveBlogCardListContainer from '../components/organisms/ContainerComponents/Blog/ActiveBlogCardListContainer';
 
 const Home: NextPage = () => {
-  return <BlogCardListContainer />;
+  return <ActiveBlogCardListContainer />;
 };
 
 export default Home;

@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { color } from '../../../../styles/color';
 import Title from '../../../atoms/Text/Title';
 
-type BlogCardProps = {
+type ActiveBlogCardProps = {
   blogId: string;
   title: string;
   thumbnail: string;
 };
 
-const BlogCard = ({ blogId, title, thumbnail }: BlogCardProps) => {
+const ActiveBlogCard = ({ blogId, title, thumbnail }: ActiveBlogCardProps) => {
   return (
     <article>
       <Link href={`/blogs/${blogId}`}>
@@ -31,4 +31,4 @@ const BlogCard = ({ blogId, title, thumbnail }: BlogCardProps) => {
   );
 };
 
-export default BlogCard;
+export default ActiveBlogCard;
