@@ -12,7 +12,10 @@ final class Email extends StructStringLengthLimit {
     public static function of($value): Email {
         Validator::make(
             ['メールアドレス' => $value],
-            ['メールアドレス' => ['email']]
+            ['メールアドレス' => ['email']],
+            [
+                'email' => ':attributeのフォーマットが不正です',
+            ]
         )->validate();
 
         return parent::of($value);

@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler {
         }
 
         if ($e instanceof AuthenticationException) {
-            return response('認証に失敗しました。', 400);
+            return response('認証に失敗しました。', 403);
         }
 
         if ($e instanceof IllegalExistsUserException) {

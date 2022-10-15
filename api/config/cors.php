@@ -1,34 +1,37 @@
 <?php
 
-return [
+switch(env('APP_ENV')) {
+    case 'local':
+        return [
+            'paths' => ['api/*', 'users/login', 'users/create', 'sanctum/csrf-cookie'],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
-    */
+            'allowed_methods'          => ['*'],
+            'allowed_origins'          => ['http://localhost:3000'],
+            'allowed_origins_patterns' => [],
+            'allowed_headers'          => ['*'],
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+            'exposed_headers' => [],
 
-    'allowed_methods' => ['*'],
+            'max_age' => 0,
 
-    'allowed_origins' => ['*'],
+            'supports_credentials' => true,
+        ];
+        break;
 
-    'allowed_origins_patterns' => [],
+    case 'production':
+        return [
+            'paths' => ['api/*', 'users/login', 'users/create', 'sanctum/csrf-cookie'],
 
-    'allowed_headers' => ['*'],
+            'allowed_methods'          => ['*'],
+            'allowed_origins'          => ['https://yappi.jp'],
+            'allowed_origins_patterns' => [],
+            'allowed_headers'          => ['*'],
 
-    'exposed_headers' => [],
+            'exposed_headers' => [],
 
-    'max_age' => 0,
+            'max_age' => 0,
 
-    'supports_credentials' => false,
-
-];
+            'supports_credentials' => true,
+        ];
+        break;
+}
