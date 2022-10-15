@@ -6,6 +6,7 @@ services:
       context: ./client
     container_name: blog-client
     tty: true
+    command: "yarn dev"
     environment:
       TZ: "Asia/Tokyo"
       HOST: "0.0.0.0"
@@ -34,7 +35,7 @@ services:
     build: ./database
     container_name: blog-db
     ports:
-      - "33060:3306"
+      - "30060:3306"
     volumes:
       - ./database/mysql/mysql.conf:/etc/mysql/mysql.conf
       - ./database/mysql/lib:/var/lib/mysql

@@ -23,11 +23,7 @@ final class ActiveBlogList {
         $result = [];
 
         foreach ($this->activeBlogList as $activeBlog) {
-            $result[] = [
-                'title'        => $activeBlog->title()->value(),
-                'body'         => $activeBlog->body()->value(),
-                'thumbnail'    => $activeBlog->thumbnailUrl()->value(),
-            ];
+            $result[] = $activeBlog->ofJson();
         }
 
         return $result;
