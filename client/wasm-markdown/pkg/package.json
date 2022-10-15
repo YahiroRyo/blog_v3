@@ -1,0 +1,13 @@
+{
+  "name": "wasm-markdown",
+  "version": "0.1.0",
+  "files": [
+    "wasm_markdown_bg.wasm",
+    "wasm_markdown.js",
+    "wasm_markdown_bg.js",
+    "wasm_markdown.d.ts"
+  ],
+  "module": "wasm_markdown.js",
+  "types": "wasm_markdown.d.ts",
+  "sideEffects": false
+}
