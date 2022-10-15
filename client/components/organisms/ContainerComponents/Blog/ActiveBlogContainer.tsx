@@ -8,12 +8,16 @@ import ActiveBlog from '../../PresentationalComponents/Blog/ActiveBlog';
 const ActiveBlogContainer = () => {
   const router = useRouter();
   const fecher = async () => {
-    let activeBlog = (
+    const preBlog = (
       await axios.get<DetailActiveBlog>(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${router.query.blogId}`)
     ).data;
-    activeBlog.body = markdownOfHTML('# test');
 
-    return activeBlog;
+    const blog = {
+      ...preBlog,
+      body: markdownOfHTML(preBlog.body),
+    };
+
+    return blog;
   };
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${router.query.blogId}`, fecher);
 
