@@ -34,6 +34,7 @@ final class DetailBlogRepository {
         }
 
         return new DetailBlog(
+            BlogId::of($blog->blogId),
             Title::of($blog->title),
             Body::of($blog->body),
             ThumbnailUrl::of($blog->thumbnail),
