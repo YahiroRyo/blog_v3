@@ -14,7 +14,7 @@ const InputGroup = ({ label, value, setValue, style }: InputProps) => {
     <div style={style}>
       <Label>{label}</Label>
       <Input
-        style={{ marginTop: '0.25rem', width: '100%' }}
+        style={{ marginTop: '0.5rem', width: '100%' }}
         type='text'
         value={value}
         onChange={(e) => setValue(e.target.value)}

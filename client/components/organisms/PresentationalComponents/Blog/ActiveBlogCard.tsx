@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { CSSProperties } from 'react';
 import { color } from '../../../../styles/color';
 import Title from '../../../atoms/Text/Title';
 
@@ -7,11 +8,12 @@ type ActiveBlogCardProps = {
   blogId: string;
   title: string;
   thumbnail: string;
+  style?: CSSProperties;
 };
 
-const ActiveBlogCard = ({ blogId, title, thumbnail }: ActiveBlogCardProps) => {
+const ActiveBlogCard = ({ blogId, title, thumbnail, style }: ActiveBlogCardProps) => {
   return (
-    <article>
+    <article style={{ ...style, borderRadius: '3rem', boxShadow: '0.8rem 0.8rem 2rem rgba(0, 0, 0, .25)' }}>
       <Link href={`/blogs/${blogId}`}>
         <a
           style={{

@@ -8,7 +8,14 @@ type InputProps = {
 };
 
 const Input = ({ type, value, style, onChange }: InputProps) => {
-  return <input style={{ display: 'block', ...style }} type={type} value={value} onChange={onChange} />;
+  return (
+    <input
+      style={{ display: 'block', padding: '.25rem .5rem', ...style }}
+      type={type}
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
 export default Input;
