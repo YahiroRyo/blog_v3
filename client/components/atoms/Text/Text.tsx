@@ -6,14 +6,15 @@ type TextProps = {
 
 const Text = ({ children }: TextProps) => {
   return (
-    <h1
+    <p
       style={{
         fontSize: '1rem',
+        margin: 0,
         color: color.black,
       }}
     >
       {children}
-    </h1>
+    </p>
   );
 };
 
