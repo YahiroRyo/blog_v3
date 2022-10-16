@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
-import LoginForm from '../../PresentationalComponents/Auth/LoginForm';
+import CreateUserForm from '../../PresentationalComponents/Auth/CreateUserForm';
 
-const LoginContainer = () => {
+const CreateUserContainer = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -13,7 +13,7 @@ const LoginContainer = () => {
 
     try {
       await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/sanctum/csrf-cookie`);
-      const response = await axios.post<{ token: string }>(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
+      const response = await axios.post<{ token: string }>(`${process.env.NEXT_PUBLIC_API_URL}/users/create`, {
         email: email,
         password: password,
       });
@@ -36,17 +36,12 @@ const LoginContainer = () => {
         return;
       }
 
-      if (e.response.status === 403) {
-        setError('認証できませんでした');
-        return;
-      }
-
       setError(e.response.data);
     }
   };
 
   return (
-    <LoginForm
+    <CreateUserForm
       error={error}
       submit={login}
       email={email}
@@ -57,4 +52,4 @@ const LoginContainer = () => {
   );
 };
 
-export default LoginContainer;
+export default CreateUserContainer;
