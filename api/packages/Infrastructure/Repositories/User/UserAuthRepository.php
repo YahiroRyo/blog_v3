@@ -2,30 +2,22 @@
 
 namespace Packages\Infrastructure\Repositories\User;
 
-use DB;
-use Hash;
 use Illuminate\Auth\AuthenticationException;
 use Packages\Domain\User\Entities\InitLoginUser;
+use Packages\Domain\User\ValueObjects\Token;
+use Packages\Infrastructure\Eloquent\User\User;
 
 final class UserAuthRepository {
-    public function login(InitLoginUser $initLoginUser): void {
-        $user = DB::selectOne('
-            SELECT
-                password
-            FROM users
-            INNER JOIN activeUsers
-                USING(userId)
-            WHERE
-                users.email = ?
-        ', [
-            $initLoginUser->email()->value(),
-        ]);
+    public function login(InitLoginUser $initLoginUser): Token {
+        if (auth()->attempt(['email' => $initLoginUser->email()->value(), 'password' => $initLoginUser->password()->value()])) {
+            $user = User::find(auth()->id());
 
-        if (!$user || !Hash::check($initLoginUser->password()->value(), $user->password)) {
-            throw new AuthenticationException();
+            $user->tokens()->where('name', 'auth_token')->delete();
+            $user->token = $user->createToken('auth_token')->plainTextToken;
+
+            return Token::of($user->token);
         }
-
-        session()->regenerate();
+        throw new AuthenticationException();
     }
 
     public function logout(): void {
@@ -33,6 +25,6 @@ final class UserAuthRepository {
     }
 
     public function isLoggedIn(): bool {
-        return auth()->check();
+        return request()->user('sanctum') !== null;
     }
 }

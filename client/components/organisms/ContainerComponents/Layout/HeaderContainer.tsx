@@ -5,8 +5,14 @@ import LoggedInHeader from '../../PresentationalComponents/Layout/LoggedInHeader
 
 const HeaderContainer = () => {
   const fetcher = async () => {
+    if (!sessionStorage.getItem('token')) return false;
+
     try {
-      const response = await axios.get<{ isLoggedIn: boolean }>(`${process.env.NEXT_PUBLIC_API_URL}/users/isLoggedIn`);
+      const response = await axios.get<{ isLoggedIn: boolean }>(`${process.env.NEXT_PUBLIC_API_URL}/users/isLoggedIn`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      });
       return response.data.isLoggedIn;
     } catch (e) {
       return false;

@@ -20,12 +20,12 @@ class AdminUserController extends Controller {
         $this->userAuthService = $userAuthService;
     }
 
-    public function createUser(CreateUserRequest $request): void {
-        $this->initUserService->createUser($request->ofDomain());
+    public function createUser(CreateUserRequest $request): array {
+        return $this->initUserService->createUser($request->ofDomain());
     }
 
-    public function login(LoginRequest $request): void {
-        $this->userAuthService->login($request->ofDomain());
+    public function login(LoginRequest $request): array {
+        return $this->userAuthService->login($request->ofDomain());
     }
 
     public function logout(): void {
