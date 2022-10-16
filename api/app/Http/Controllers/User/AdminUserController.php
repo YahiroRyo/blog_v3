@@ -31,4 +31,8 @@ class AdminUserController extends Controller {
     public function logout(): void {
         $this->userAuthService->logout();
     }
+
+    public function isLoggedIn(): array {
+        return $this->userAuthService->isLoggedIn();
+    }
 }

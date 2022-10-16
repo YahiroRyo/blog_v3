@@ -31,4 +31,8 @@ final class UserAuthRepository {
     public function logout(): void {
         auth()->logout();
     }
+
+    public function isLoggedIn(): bool {
+        return auth()->check();
+    }
 }

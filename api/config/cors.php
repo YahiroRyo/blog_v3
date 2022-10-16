@@ -3,7 +3,7 @@
 switch(env('APP_ENV')) {
     case 'local':
         return [
-            'paths' => ['api/*', 'users/login', 'users/create', 'sanctum/csrf-cookie'],
+            'paths' => ['api/*', 'users/*', 'sanctum/csrf-cookie'],
 
             'allowed_methods'          => ['*'],
             'allowed_origins'          => ['http://localhost:3000'],

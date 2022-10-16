@@ -9,7 +9,7 @@ const ActiveBlogCardList = ({ blogList }: ActiveBlogCardListProps) => {
   return (
     <>
       {blogList.map((blog: any, key: number) => (
-        <BlogCard key={key} {...blog} />
+        <BlogCard style={{ margin: '2rem 0' }} key={key} {...blog} />
       ))}
     </>
   );
