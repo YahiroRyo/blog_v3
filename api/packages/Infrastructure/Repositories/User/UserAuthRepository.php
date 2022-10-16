@@ -21,8 +21,7 @@ final class UserAuthRepository {
     }
 
     public function logout(): void {
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
+        auth()->logout();
     }
 
     public function isLoggedIn(): bool {
