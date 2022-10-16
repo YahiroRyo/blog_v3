@@ -19,4 +19,8 @@ final class UserAuthService {
     public function logout(): void {
         $this->userAuthRepository->logout();
     }
+
+    public function isLoggedIn(): array {
+        return ['isLoggedIn' => $this->userAuthRepository->isLoggedIn() ];
+    }
 }

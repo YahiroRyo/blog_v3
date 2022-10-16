@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/users')->group(function () {
+    Route::get('/isLoggedIn', [AdminUserController::class, 'isLoggedIn']);
     Route::post('/create', [AdminUserController::class, 'createUser'])->name('register');
     Route::post('/login', [AdminUserController::class, 'login'])->name('login');
     Route::post('/logout', [AdminUserController::class, 'logout'])->name('logout');
