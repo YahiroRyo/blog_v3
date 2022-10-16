@@ -4,11 +4,13 @@ namespace Packages\Infrastructure\Repositories\User;
 
 use Illuminate\Support\Facades\DB;
 use Packages\Domain\User\Entities\InitUser;
+use Packages\Domain\User\ValueObjects\Token;
+use Packages\Infrastructure\Eloquent\User\User;
 use Packages\Infrastructure\Repositories\Exceptions\User\FailInitUserException;
 use Packages\Infrastructure\Repositories\Exceptions\User\IllegalExistsUserException;
 
 final class InitUserRepository {
-    public function createUser(InitUser $initUser): void {
+    public function createUser(InitUser $initUser): Token {
         $user = DB::selectOne('
             SELECT
                 userId
@@ -21,7 +23,9 @@ final class InitUserRepository {
             throw new IllegalExistsUserException();
         }
 
-        DB::transaction(function () use ($initUser) {
+        $token = null;
+
+        DB::transaction(function () use ($initUser, &$token) {
             $isSuccess = DB::insert('
                 INSERT INTO users (
                     email,
@@ -57,6 +61,21 @@ final class InitUserRepository {
             if (!$isSuccess) {
                 throw new FailInitUserException();
             }
+
+            if (auth()->attempt(['email' => $initUser->email()->value(), 'password' => $initUser->password()->value()])) {
+                $user = User::find(auth()->id());
+
+                $user->tokens()->where('name', 'auth_token')->delete();
+                $user->token = $user->createToken('auth_token')->plainTextToken;
+
+                $token = Token::of($user->token);
+            }
         }, 3);
+
+        if (!$token) {
+            throw new FailInitUserException();
+        }
+
+        return $token;
     }
 }

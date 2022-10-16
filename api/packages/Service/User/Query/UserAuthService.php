@@ -12,8 +12,8 @@ final class UserAuthService {
         $this->userAuthRepository = $userAuthRepository;
     }
 
-    public function login(InitLoginUser $initLoginUser): void {
-        $this->userAuthRepository->login($initLoginUser);
+    public function login(InitLoginUser $initLoginUser): array {
+        return ['token' => $this->userAuthRepository->login($initLoginUser)->value()];
     }
 
     public function logout(): void {
