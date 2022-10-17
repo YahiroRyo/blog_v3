@@ -17,7 +17,9 @@ const ActiveBlogContainer = () => {
       body: markdownOfHTML(preBlog.body),
     };
 
-    return blog;
+    const description = preBlog.body.replaceAll('#', '').substring(0, 120);
+
+    return { ...blog, description: description };
   };
   const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${router.query.blogId}`, fecher);
 
