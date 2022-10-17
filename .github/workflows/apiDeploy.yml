@@ -1,0 +1,35 @@
+name: api deploy
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
+    steps:
+    - uses: actions/setup-node@v3
+    - uses: actions/checkout@v2
+      with:
+        SLS_INTERACTIVE_SETUP_ENABLE: 1
+    - name: configure aws
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+    - name: composer install
+      run: composer install -n --prefer-dist
+    - name: config cache delete
+      run: php artisan config:clear
+    - name: copy .env.production
+      run: aws s3 cp s3://yappi-blog-v3/secret/api/.env.production "./"
+    - name: copy .crt
+      run: aws s3 cp s3://yappi-blog-v3/secret/api/ca-certificates.crt "./"
+    - name: install sls
+      run: npm i -g serverless
+    - name: deploy
+      run: serverless deploy --stage prd

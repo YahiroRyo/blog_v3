@@ -17,3 +17,5 @@ yarn-error.log
 .php-cs-fixer.cache
 
 .env.production
+.serverless
+ca-certificates.crt

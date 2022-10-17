@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "bref/bref": "^1.7",
+        "bref/extra-php-extensions": "^0.11.34",
+        "bref/laravel-bridge": "^1.2",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "laravel/framework": "^9.19",
