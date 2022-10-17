@@ -8,7 +8,11 @@ type TextAreaProps = {
 
 const TextArea = ({ value, style, onChange }: TextAreaProps) => {
   return (
-    <textarea style={{ display: 'block', minHeight: '6rem', ...style }} value={value} onChange={onChange}></textarea>
+    <textarea
+      style={{ display: 'block', minHeight: '15rem', padding: '1rem', lineHeight: '1.5', ...style }}
+      value={value}
+      onChange={onChange}
+    ></textarea>
   );
 };
 

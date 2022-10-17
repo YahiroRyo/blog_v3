@@ -21,7 +21,7 @@ final class InProgressBlogRepository {
                     blogId = ?
             ', [$inProgressBlog->blogId()->value()]);
 
-            $isSuccess = DB::update('
+            DB::update('
                 UPDATE blogContents
                 SET
                     title = ?,
@@ -34,11 +34,7 @@ final class InProgressBlogRepository {
                 $inProgressBlog->blogId()->value()
             ]);
 
-            if (!$isSuccess) {
-                throw new FailEditBlogException();
-            }
-
-            $isSuccess = DB::update('
+            DB::update('
                 UPDATE blogs
                 SET
                     updatedAt = ?
@@ -48,10 +44,6 @@ final class InProgressBlogRepository {
                 Carbon::now(),
                 $inProgressBlog->blogId()->value()
             ]);
-
-            if (!$isSuccess) {
-                throw new FailEditBlogException();
-            }
 
             if ($inProgressBlog->isActive()->value()) {
                 $isSuccess = DB::insert('

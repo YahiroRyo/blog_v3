@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
-import { getCookie } from '../../../../utils/Cookie';
 import CreateBlogForm from '../../PresentationalComponents/Blog/CreateBlogForm';
 
 const CreateBlogContainer = () => {
@@ -15,8 +14,7 @@ const CreateBlogContainer = () => {
   const createBlog = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const cookie = getCookie(document.cookie);
-    if ('token' in cookie) return;
+    if (!sessionStorage.getItem('token')) return;
 
     try {
       const formData = new FormData();
@@ -26,7 +24,7 @@ const CreateBlogContainer = () => {
 
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs`, formData, {
         headers: {
-          Authorization: `Bearer ${cookie['token']}`,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       });
       router.push('/admin/blogs');

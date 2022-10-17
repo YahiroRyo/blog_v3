@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
-import { cookieOfString, getCookie } from '../../../../utils/Cookie';
 import CreateUserForm from '../../PresentationalComponents/Auth/CreateUserForm';
 
 const CreateUserContainer = () => {
@@ -19,9 +18,7 @@ const CreateUserContainer = () => {
         password: password,
       });
 
-      const cookie = getCookie(document.cookie);
-      cookie['token'] = response.data.token;
-      document.cookie = cookieOfString(cookie);
+      sessionStorage.setItem('token', response.data.token);
       location.href = '/admin';
     } catch (e) {
       if (!axios.isAxiosError(e) || !e.response) {
