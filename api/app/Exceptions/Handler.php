@@ -6,6 +6,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Client\ResponseSequence;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Packages\Infrastructure\Repositories\Exceptions\Blog\FailCreateBlogException;
 use Packages\Infrastructure\Repositories\Exceptions\Blog\FailEditBlogException;
@@ -83,7 +84,7 @@ class Handler extends ExceptionHandler {
 
         logs()->error($e);
 
-        return response('不明なエラーが発生しました。時間をおいてからもう一度お試しください。');
+        return response('不明なエラーが発生しました。時間をおいてからもう一度お試しください。', 500);
     }
 
     /**
