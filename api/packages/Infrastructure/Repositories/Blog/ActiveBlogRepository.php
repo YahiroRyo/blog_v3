@@ -25,6 +25,8 @@ final class ActiveBlogRepository {
                 USING(blogId)
             INNER JOIN blogContents
                 USING(blogId)
+            ORDER BY
+                blogs.blogId desc
         ');
 
         foreach ($activeBlogList as $activeBlog) {
