@@ -1,0 +1,56 @@
+useDotenv: true
+service: blog-api
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  stage: dev
+  runtime: provided.al2
+  memorySize: 128
+  environment:
+    APP_STORAGE: '/tmp'
+
+custom:
+  defaultStage: dev
+  profiles:
+    dev: sls-itg
+    stg: sls-stg
+    prd: sls-prd
+  apigwBinary:
+    types:
+      - multipart/form-data
+
+package:
+  exclude:
+    - node_modules/**
+    - public/storage
+    - resources/assets/**
+    - storage/**
+    - tests/**
+
+functions:
+  web:
+    handler: public/index.php
+    timeout: 28
+    layers:
+      - ${bref-extra:gd-php-81}
+      - ${bref:layer.php-81-fpm}
+    events:
+      - http: 'ANY /'
+      - http: 'ANY /{proxy+}'
+    environment:
+      VIEW_COMPILED_PATH: /tmp/storage/framework/views
+
+  artisan:
+    handler: artisan
+    timeout: 120
+    layers:
+      - ${bref:layer.php-81-fpm}
+      - ${bref-extra:gd-php-81}
+      - ${bref:layer.console}
+    environment:
+      VIEW_COMPILED_PATH: /tmp/storage/framework/views
+
+plugins:
+  - ./vendor/bref/bref
+  - ./vendor/bref/extra-php-extensions
