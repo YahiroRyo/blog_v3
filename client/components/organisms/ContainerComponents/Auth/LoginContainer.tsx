@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
+import { cookieOfString, getCookie } from '../../../../utils/Cookie';
 import LoginForm from '../../PresentationalComponents/Auth/LoginForm';
 
 const LoginContainer = () => {
@@ -18,7 +19,10 @@ const LoginContainer = () => {
         password: password,
       });
 
-      sessionStorage.setItem('token', response.data.token);
+      const cookie = getCookie(document.cookie);
+      cookie['token'] = response.data.token;
+      document.cookie = cookieOfString(cookie);
+      console.log(document.cookie);
       location.href = '/admin';
     } catch (e) {
       if (!axios.isAxiosError(e) || !e.response) {

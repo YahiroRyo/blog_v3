@@ -1,13 +1,14 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, MouseEvent } from 'react';
 import { color } from '../../../styles/color';
 
 type ButtonProps = {
   type: 'button' | 'submit' | 'reset' | undefined;
-  style?: CSSProperties;
   children: React.ReactNode;
+  style?: CSSProperties;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button = ({ type, children, style }: ButtonProps) => {
+const Button = ({ type, children, style, onClick }: ButtonProps) => {
   return (
     <button
       style={{
@@ -19,6 +20,7 @@ const Button = ({ type, children, style }: ButtonProps) => {
         color: color.white,
         ...style,
       }}
+      onClick={onClick}
       type={type}
     >
       {children}

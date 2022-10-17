@@ -1,16 +1,18 @@
 import axios from 'axios';
 import useSWR from 'swr';
 import { Blog } from '../../../../types/Blog/Blog';
+import { getCookie } from '../../../../utils/Cookie';
 import BlogCardList from '../../PresentationalComponents/Blog/BlogCardList';
 
 const BlogCardListContainer = () => {
   const fecher = async () => {
-    if (!sessionStorage.getItem('token')) return;
+    const cookie = getCookie(document.cookie);
+    if ('token' in cookie) return;
 
     return (
       await axios.get<Blog[]>(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs`, {
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+          Authorization: `Bearer ${cookie['token']}`,
         },
       })
     ).data;
