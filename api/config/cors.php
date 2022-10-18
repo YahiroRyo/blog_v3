@@ -23,7 +23,7 @@ switch(env('APP_ENV')) {
             'paths' => ['api/*', 'users/login', 'users/create', 'sanctum/csrf-cookie'],
 
             'allowed_methods'          => ['*'],
-            'allowed_origins'          => ['https://yappi.jp'],
+            'allowed_origins'          => ['https://yappi.jp', 'https://www.yappi.jp'],
             'allowed_origins_patterns' => [],
             'allowed_headers'          => ['*'],
 
