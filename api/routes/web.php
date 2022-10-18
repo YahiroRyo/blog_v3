@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function() {
+    dd( env('MYSQL_ATTR_SSL_CA'));
+});
+
 Route::prefix('/users')->group(function () {
     Route::get('/isLoggedIn', [AdminUserController::class, 'isLoggedIn']);
     Route::post('/create', [AdminUserController::class, 'createUser'])->name('register');
