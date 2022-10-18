@@ -42,7 +42,7 @@ $app->singleton(
 );
 
 switch ($_SERVER['SERVER_NAME'] ?? 'localhost') {
-    case 'yappi.jp':
+    case 'api.yappi.jp':
         $app->loadEnvironmentFrom('.env.production');
         break;
     default:
