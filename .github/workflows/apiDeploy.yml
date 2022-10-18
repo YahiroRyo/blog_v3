@@ -25,8 +25,10 @@ jobs:
       run: composer install -n --prefer-dist
     - name: config cache delete
       run: php artisan config:clear
-    - name: copy .env.production
-      run: aws s3 cp s3://yappi-blog-v3/secret/api/env.production "./.env.production"
+    - name: copy secret.yml
+      run: aws s3 cp s3://yappi-blog-v3/secret/api/secret.yml "./config/secret.yml"
+    - name: copy appKey.yml
+      run: aws s3 cp s3://yappi-blog-v3/secret/api/appKey.yml "./config/appKey.yml"
     - name: copy .crt
       run: aws s3 cp s3://yappi-blog-v3/secret/api/ca-certificates.crt "./"
     - name: install sls

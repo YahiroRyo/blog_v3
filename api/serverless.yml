@@ -16,6 +16,8 @@ custom:
     dev: sls-itg
     stg: sls-stg
     prd: sls-prd
+  secret: ${file(./config/secret.yml)}
+  appkey: ${file(./config/appKey.yml)}
   apigwBinary:
     types:
       - multipart/form-data
@@ -39,6 +41,21 @@ functions:
       - http: 'ANY /'
       - http: 'ANY /{proxy+}'
     environment:
+      APP_KEY: ${self:custom.appkey.APP_KEY}
+      DB_PORT: ${self:custom.secret.DB_PORT}
+      DB_HOST: ${self:custom.secret.DB_HOST}
+      DB_DATABASE: ${self:custom.secret.DB_DATABASE}
+      DB_USERNAME: ${self:custom.secret.DB_USERNAME}
+      DB_PASSWORD: ${self:custom.secret.DB_PASSWORD}
+      MYSQL_ATTR_SSL_CA: ${self:custom.secret.MYSQL_ATTR_SSL_CA}
+      AWS_BUCKET: ${self:custom.secret.AWS_BUCKET}
+      SESSION_DRIVER: ${self:custom.secret.SESSION_DRIVER}
+      CACHE_DRIVER: ${self:custom.secret.CACHE_DRIVER}
+      APP_NAME: Blog
+      APP_ENV: production
+      SANCTUM_STATEFUL_DOMAINS: yappi.jp
+      SESSION_DOMAIN: .yappi.jp
+      LOG_CHANNEL: stderr
       VIEW_COMPILED_PATH: /tmp/storage/framework/views
 
   artisan:
@@ -49,6 +66,21 @@ functions:
       - ${bref-extra:gd-php-81}
       - ${bref:layer.console}
     environment:
+      APP_KEY: ${self:custom.appkey.APP_KEY}
+      DB_PORT: ${self:custom.secret.DB_PORT}
+      DB_HOST: ${self:custom.secret.DB_HOST}
+      DB_DATABASE: ${self:custom.secret.DB_DATABASE}
+      DB_USERNAME: ${self:custom.secret.DB_USERNAME}
+      DB_PASSWORD: ${self:custom.secret.DB_PASSWORD}
+      MYSQL_ATTR_SSL_CA: ${self:custom.secret.MYSQL_ATTR_SSL_CA}
+      AWS_BUCKET: ${self:custom.secret.AWS_BUCKET}
+      SESSION_DRIVER: ${self:custom.secret.SESSION_DRIVER}
+      CACHE_DRIVER: ${self:custom.secret.CACHE_DRIVER}
+      APP_NAME: Blog
+      APP_ENV: production
+      SANCTUM_STATEFUL_DOMAINS: yappi.jp
+      SESSION_DOMAIN: .yappi.jp
+      LOG_CHANNEL: stderr
       VIEW_COMPILED_PATH: /tmp/storage/framework/views
 
 plugins:

@@ -16,6 +16,5 @@ yarn-error.log
 /.vscode
 .php-cs-fixer.cache
 
-.env.production
 .serverless
 ca-certificates.crt
