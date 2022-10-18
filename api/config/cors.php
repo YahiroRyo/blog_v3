@@ -20,7 +20,7 @@ switch(env('APP_ENV')) {
 
     case 'production':
         return [
-            'paths' => ['api/*', 'users/login', 'users/create', 'sanctum/csrf-cookie'],
+            'paths' => ['api/*', 'users/*', 'sanctum/csrf-cookie'],
 
             'allowed_methods'          => ['*'],
             'allowed_origins'          => ['https://yappi.jp', 'https://www.yappi.jp'],
