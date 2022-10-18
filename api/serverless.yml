@@ -6,7 +6,7 @@ provider:
   region: ap-northeast-1
   stage: dev
   runtime: provided.al2
-  memorySize: 128
+  memorySize: 512
   environment:
     APP_STORAGE: '/tmp'
 
