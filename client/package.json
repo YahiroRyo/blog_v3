@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "vdev": "vercel dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -15,7 +16,8 @@
     "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "swr": "^1.3.0"
+    "swr": "^1.3.0",
+    "vercel": "^28.4.12"
   },
   "devDependencies": {
     "@types/node": "18.8.5",
