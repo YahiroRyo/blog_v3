@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Blog\Admin;
+namespace Tests\Feature\Blog\Client;
 
 use Packages\Domain\Blog\ValueObjects\BlogId;
 use Packages\Infrastructure\Eloquent\Blog\Blog;

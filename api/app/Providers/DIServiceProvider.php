@@ -6,27 +6,33 @@ use Illuminate\Support\ServiceProvider;
 use Packages\Infrastructure\Aws\Image\Upload\LocalUploadImage;
 use Packages\Infrastructure\Aws\Image\Upload\S3UploadImage;
 use Packages\Infrastructure\Aws\Image\Upload\UploadImage;
+use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
+use Packages\Infrastructure\Repositories\Blog\NoSQLDetailActiveBlogAccessRepository;
+use Packages\Infrastructure\Repositories\Blog\LocalDetailActiveBlogAccessRepository;
 
 class DIServiceProvider extends ServiceProvider {
+    private array $productionBinds = [
+        UploadImage::class                          => S3UploadImage::class,
+        DetailActiveBlogAccessRepository::class     => NoSQLDetailActiveBlogAccessRepository::class
+    ];
+    private array $localBinds = [
+        UploadImage::class                          => LocalUploadImage::class,
+        DetailActiveBlogAccessRepository::class     => LocalDetailActiveBlogAccessRepository::class
+    ];
+
     public function register(): void {
-        $this->bindUploadImage();
-    }
-
-    public function boot(): void {
-    }
-
-    private function bindUploadImage(): void {
         if (app()->isProduction()) {
-            $this->app->bind(
-                UploadImage::class,
-                S3UploadImage::class,
-            );
+            foreach ($this->productionBinds as $interface => $class) {
+                $this->app->bind($interface, $class);
+            }
             return;
         }
 
-        $this->app->bind(
-            UploadImage::class,
-            LocalUploadImage::class,
-        );
+        foreach ($this->localBinds as $interface => $class) {
+            $this->app->bind($interface, $class);
+        }
+    }
+
+    public function boot(): void {
     }
 }

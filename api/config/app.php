@@ -189,6 +189,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\DataBaseQueryServiceProvider::class,
         App\Providers\DIServiceProvider::class,
+        App\Providers\DynamoServiceProvider::class,
         /*
          * Application Service Providers...
          */

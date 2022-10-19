@@ -41,6 +41,8 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->register(App\Providers\DynamoServiceProvider::class);
+
 switch ($_SERVER['SERVER_NAME'] ?? 'localhost') {
     default:
         $app->loadEnvironmentFrom('.env.local');
