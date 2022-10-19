@@ -3,7 +3,6 @@
 namespace Packages\Infrastructure\Repositories\Blog;
 
 use Aws\DynamoDb\DynamoDbClient;
-use Aws\DynamoDb\Marshaler;
 use Carbon\Carbon;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
 use Packages\Domain\Blog\Entities\DetailActiveBlogAccess;

@@ -2,6 +2,7 @@
 
 namespace Packages\Infrastructure\Repositories\Blog;
 
+use Aws\DynamoDb\DynamoDbClient;
 use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Packages\Domain\Blog\Entities\DetailBlog;
@@ -12,6 +13,13 @@ use Packages\Domain\Blog\ValueObjects\ThumbnailUrl;
 use Packages\Domain\Blog\ValueObjects\Title;
 
 final class DetailBlogRepository {
+    private DynamoDbClient $dynamoDbClient;
+
+    public function __construct(DynamoDbClient $dynamoDbClient)
+    {
+        $this->dynamoDbClient = $dynamoDbClient;
+    }
+
     public function blog(BlogId $blogId): DetailBlog {
         $blog = DB::selectOne('
             SELECT
@@ -39,6 +47,7 @@ final class DetailBlogRepository {
             Body::of($blog->body),
             ThumbnailUrl::of($blog->thumbnail),
             IsActive::of($blog->isActive),
+
         );
     }
 }
