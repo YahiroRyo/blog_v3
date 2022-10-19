@@ -5,7 +5,6 @@ import ActiveBlogContainer from '../../components/organisms/ContainerComponents/
 import SiteContainer from '../../components/organisms/ContainerComponents/Layout/SiteContainer';
 import { DetailActiveBlog } from '../../types/Blog/DetailActiveBlog';
 import { DetailActiveBlogMeta } from '../../types/Blog/DetailActiveBlogMeta';
-import { markdownOfHTML } from '../../wasm-markdown/pkg/wasm_markdown';
 
 type BlogProps = DetailActiveBlogMeta & {
   error: string;
@@ -46,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       `${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.query.blogId}`,
     );
     result.title = response.data.title;
-    result.body = markdownOfHTML(response.data.body);
+    result.body = response.data.body;
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
     result.description = response.data.body.replaceAll('#', '').substring(0, 120);
