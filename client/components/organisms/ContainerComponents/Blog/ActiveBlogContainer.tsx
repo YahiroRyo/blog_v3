@@ -12,12 +12,13 @@ const ActiveBlogContainer = (preProps: DetailActiveBlogMeta) => {
     mainImage: preProps.mainImage,
   });
 
-  // useEffect(() => {
-  //   setProps({
-  //     ...props,
-  //     body: markdownOfHTML(props.body),
-  //   });
-  // });
+  useEffect(() => {
+    console.log('test');
+    setProps({
+      ...props,
+      body: markdownOfHTML(props.body),
+    });
+  }, [props]);
 
   return <ActiveBlog {...props} />;
 };
