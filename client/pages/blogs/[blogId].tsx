@@ -39,10 +39,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     description: '',
     error: '',
   };
-  JSON.stringify(context.req.headers);
-  context.req.headers['user-agent'];
-  context.req.headers.referer;
-  context.req.headers.from;
+
+  axios.post(`${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.query.blogId}/access`, {
+    headers: JSON.stringify(context.req.headers),
+    userAgent: context.req.headers['user-agent'],
+    referer: context.req.headers.referer,
+    from: context.req.headers.from,
+  });
 
   try {
     const response = await axios.get<DetailActiveBlog>(
