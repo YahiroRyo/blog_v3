@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { marked } from 'marked';
 import { GetServerSideProps } from 'next';
 import ActiveBlogContainer from '../../components/organisms/ContainerComponents/Blog/ActiveBlogContainer';
 import SiteContainer from '../../components/organisms/ContainerComponents/Layout/SiteContainer';
@@ -44,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       `${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.query.blogId}`,
     );
     result.title = response.data.title;
-    result.body = response.data.body;
+    result.body = marked(response.data.body);
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
     result.description = response.data.body.replaceAll('#', '');
