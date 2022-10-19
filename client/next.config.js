@@ -6,7 +6,7 @@ const nextConfig = {
     optimizeFonts: true,
   },
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'yappi-blog-v3.s3.ap-northeast-1.amazonaws.com'],
   },
   webpack: (config, { isServer }) => {
     config.experiments = {

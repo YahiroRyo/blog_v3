@@ -14,7 +14,8 @@ final class S3UploadImage extends BaseUploadImage implements UploadImage {
         $path = Storage::disk('s3')->putFileAs(
             $initUploadImage->path()->value(),
             new File($tmpImageFilePath->value()),
-            $initUploadImage->fileName()->value()
+            $initUploadImage->fileName()->value(),
+            'public'
         );
 
         if (!$path) {
