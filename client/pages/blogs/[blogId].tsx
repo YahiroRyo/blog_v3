@@ -49,7 +49,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
     result.description = '';
+    context.res.statusCode = 200;
   } catch (e) {
+    context.res.statusCode = 404;
     result.error = '存在しないブログです';
   }
 
