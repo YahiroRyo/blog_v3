@@ -48,6 +48,9 @@ functions:
       DB_USERNAME: ${self:custom.secret.DB_USERNAME}
       DB_PASSWORD: ${self:custom.secret.DB_PASSWORD}
       MYSQL_ATTR_SSL_CA: ${self:custom.secret.MYSQL_ATTR_SSL_CA}
+      AWS_ID: ${self:custom.secret.AWS_ID}
+      AWS_SECRET_KEY: ${self:custom.secret.AWS_SECRET_KEY}
+      AWS_REGION: ${self:custom.secret.AWS_REGION}
       AWS_BUCKET: ${self:custom.secret.AWS_BUCKET}
       SESSION_DRIVER: ${self:custom.secret.SESSION_DRIVER}
       CACHE_DRIVER: ${self:custom.secret.CACHE_DRIVER}
@@ -73,6 +76,9 @@ functions:
       DB_USERNAME: ${self:custom.secret.DB_USERNAME}
       DB_PASSWORD: ${self:custom.secret.DB_PASSWORD}
       MYSQL_ATTR_SSL_CA: ${self:custom.secret.MYSQL_ATTR_SSL_CA}
+      AWS_ID: ${self:custom.secret.AWS_ID}
+      AWS_SECRET_KEY: ${self:custom.secret.AWS_SECRET_KEY}
+      AWS_REGION: ${self:custom.secret.AWS_REGION}
       AWS_BUCKET: ${self:custom.secret.AWS_BUCKET}
       SESSION_DRIVER: ${self:custom.secret.SESSION_DRIVER}
       CACHE_DRIVER: ${self:custom.secret.CACHE_DRIVER}
