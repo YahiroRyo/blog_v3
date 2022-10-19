@@ -46,10 +46,10 @@ return [
 
         's3' => [
             'driver'                  => 's3',
-            'key'                     => env('AWS_ID'),
-            'secret'                  => env('AWS_SECRET_KEY'),
-            'region'                  => env('AWS_REGION'),
-            'bucket'                  => env('AWS_BUCKET'),
+            'key'                     => env('LMD_ID'),
+            'secret'                  => env('LMD_SECRET_KEY'),
+            'region'                  => env('LMD_REGION'),
+            'bucket'                  => env('LMD_BUCKET'),
             'url'                     => env('AWS_URL'),
             'endpoint'                => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
