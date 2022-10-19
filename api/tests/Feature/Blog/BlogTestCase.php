@@ -5,6 +5,7 @@ namespace Tests\Feature\Blog;
 use Packages\Infrastructure\Repositories\Blog\ActiveBlogRepository;
 use Packages\Infrastructure\Repositories\Blog\BlogRepository;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogRepository;
+use Packages\Infrastructure\Repositories\Blog\LocalDetailActiveBlogAccessRepository;
 use Packages\Infrastructure\Repositories\Blog\DetailBlogRepository;
 use Packages\Service\Blog\Command\ActiveBlogService;
 use Packages\Service\Blog\Command\BlogService;
@@ -24,6 +25,9 @@ class BlogTestCase extends DBSetUpTestCase {
         $this->blogService             = new BlogService(new BlogRepository());
         $this->detailBlogService       = new DetailBlogService(new DetailBlogRepository());
         $this->activeBlogService       = new ActiveBlogService(new ActiveBlogRepository());
-        $this->detailActiveBlogService = new DetailActiveBlogService(new DetailActiveBlogRepository());
+        $this->detailActiveBlogService = new DetailActiveBlogService(
+            new DetailActiveBlogRepository(),
+            new LocalDetailActiveBlogAccessRepository()
+        );
     }
 }

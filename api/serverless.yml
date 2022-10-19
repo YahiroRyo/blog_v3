@@ -42,22 +42,30 @@ functions:
       - http: 'ANY /{proxy+}'
     environment:
       APP_KEY: ${self:custom.appkey.APP_KEY}
+
       DB_PORT: ${self:custom.secret.DB_PORT}
       DB_HOST: ${self:custom.secret.DB_HOST}
       DB_DATABASE: ${self:custom.secret.DB_DATABASE}
       DB_USERNAME: ${self:custom.secret.DB_USERNAME}
       DB_PASSWORD: ${self:custom.secret.DB_PASSWORD}
       MYSQL_ATTR_SSL_CA: ${self:custom.secret.MYSQL_ATTR_SSL_CA}
+
       LMD_ID: ${self:custom.secret.LMD_ID}
       LMD_SECRET_KEY: ${self:custom.secret.LMD_SECRET_KEY}
       LMD_REGION: ${self:custom.secret.LMD_REGION}
       LMD_BUCKET: ${self:custom.secret.LMD_BUCKET}
+
+      DYNAMO_ENDPOINT: ${self:custom.secret.DYNAMO_ENDPOINT}
+
       SESSION_DRIVER: ${self:custom.secret.SESSION_DRIVER}
       CACHE_DRIVER: ${self:custom.secret.CACHE_DRIVER}
+
       APP_NAME: Blog
       APP_ENV: production
+
       SANCTUM_STATEFUL_DOMAINS: yappi.jp
       SESSION_DOMAIN: .yappi.jp
+
       LOG_CHANNEL: stderr
       VIEW_COMPILED_PATH: /tmp/storage/framework/views
 
@@ -70,22 +78,32 @@ functions:
       - ${bref:layer.console}
     environment:
       APP_KEY: ${self:custom.appkey.APP_KEY}
+
       DB_PORT: ${self:custom.secret.DB_PORT}
       DB_HOST: ${self:custom.secret.DB_HOST}
       DB_DATABASE: ${self:custom.secret.DB_DATABASE}
       DB_USERNAME: ${self:custom.secret.DB_USERNAME}
       DB_PASSWORD: ${self:custom.secret.DB_PASSWORD}
       MYSQL_ATTR_SSL_CA: ${self:custom.secret.MYSQL_ATTR_SSL_CA}
+
       LMD_ID: ${self:custom.secret.LMD_ID}
       LMD_SECRET_KEY: ${self:custom.secret.LMD_SECRET_KEY}
       LMD_REGION: ${self:custom.secret.LMD_REGION}
       LMD_BUCKET: ${self:custom.secret.LMD_BUCKET}
+
+      DYNAMODB_KEY: ${self:custom.secret.LMD_ID}
+      DYNAMODB_SECRET: ${self:custom.secret.LMD_SECRET_KEY}
+      DYNAMODB_REGION: ${self:custom.secret.LMD_REGION}
+
       SESSION_DRIVER: ${self:custom.secret.SESSION_DRIVER}
       CACHE_DRIVER: ${self:custom.secret.CACHE_DRIVER}
+
       APP_NAME: Blog
       APP_ENV: production
+
       SANCTUM_STATEFUL_DOMAINS: yappi.jp
       SESSION_DOMAIN: .yappi.jp
+
       LOG_CHANNEL: stderr
       VIEW_COMPILED_PATH: /tmp/storage/framework/views
 

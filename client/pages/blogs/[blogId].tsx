@@ -49,6 +49,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
     result.description = response.data.body.replaceAll('#', '');
+    axios.post(`${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.query.blogId}/access`, {
+      headers: JSON.stringify(context.req.headers),
+      userAgent: context.req.headers['user-agent'],
+      referer: context.req.headers.referer,
+      from: context.req.headers.from,
+    });
   } catch (e) {
     result.error = '存在しないブログです';
   }

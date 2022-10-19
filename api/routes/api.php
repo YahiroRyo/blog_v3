@@ -34,5 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('/blogs')->group(function () {
     Route::get('/', [ClientBlogController::class, 'activeBlogList']);
-    Route::get('/{blogId}', [ClientBlogController::class, 'detailActiveBlog']);
+    Route::prefix('/{blogId}')->group(function () {
+        Route::get('/', [ClientBlogController::class, 'detailActiveBlog']);
+        Route::post('/access', [ClientBlogController::class, 'detialActiveBlogAccess']);
+    });
 });

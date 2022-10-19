@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Blog\Client\DetailActiveBlogRequest;
+use App\Http\Requests\Blog\Client\DetailActiveBlogAccessRequest;
 use Packages\Service\Blog\Command\ActiveBlogService;
 use Packages\Service\Blog\Command\DetailActiveBlogService;
 
@@ -25,5 +26,9 @@ class ClientBlogController extends Controller {
 
     public function detailActiveBlog(DetailActiveBlogRequest $request): array {
         return $this->detailActiveBlogService->detailActiveBlog($request->ofDomain());
+    }
+
+    public function detialActiveBlogAccess(DetailActiveBlogAccessRequest $request): void {
+        $this->detailActiveBlogService->detialActiveBlogAccess($request->ofDomain());
     }
 }
