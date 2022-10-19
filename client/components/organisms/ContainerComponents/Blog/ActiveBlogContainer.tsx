@@ -13,7 +13,6 @@ const ActiveBlogContainer = (preProps: DetailActiveBlogMeta) => {
   });
 
   useEffect(() => {
-    console.log('test');
     setProps({
       ...props,
       body: markdownOfHTML(props.body),

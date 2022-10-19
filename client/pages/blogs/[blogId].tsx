@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
-import useSWR from 'swr';
 import ActiveBlogContainer from '../../components/organisms/ContainerComponents/Blog/ActiveBlogContainer';
 import SiteContainer from '../../components/organisms/ContainerComponents/Layout/SiteContainer';
 import { DetailActiveBlog } from '../../types/Blog/DetailActiveBlog';
