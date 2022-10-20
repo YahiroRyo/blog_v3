@@ -15,6 +15,8 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
     }
 
     public function access(DetailActiveBlogAccess $detailActiveBlogAccess): void {
+        logs()->info('ACCESS');
+
         $this->dynamoDbClient->putItem([
             'TableName' => 'blogAccesses',
             'Item'      => [
