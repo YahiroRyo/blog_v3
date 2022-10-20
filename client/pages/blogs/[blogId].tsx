@@ -58,8 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         from: context.req.headers.from ?? '',
       });
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-      }
+      console.error(e);
     }
   } catch (e) {
     result.error = '存在しないブログです';
