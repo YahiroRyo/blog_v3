@@ -21,10 +21,10 @@ final class NoSQLAccessesNumDetailBlogRepository implements AccessesNumDetailBlo
     public function get(AccessesNumDetailBlog $accessesNumDetailBlog): AccessList {
         $result = AccessList::of([]);
 
-        $date = $accessesNumDetailBlog->start()->value()->diffInDays($accessesNumDetailBlog->end());
+        $date = $accessesNumDetailBlog->start()->value()->diffInDays($accessesNumDetailBlog->end()->value());
         for ($i = 0; $i < $date; $i++) {
             $result = $result->add(new Access(
-                AccessDate::of((new Carbon($accessesNumDetailBlog->start()))->addDays($i)->toDateString()),
+                AccessDate::of((new Carbon($accessesNumDetailBlog->start()->value()))->addDays($i)->toDateString()),
                 AccessesNum::of(0)
             ));
         }

@@ -49,7 +49,9 @@ final class AccessList extends Elements {
         $result = [];
 
         foreach ($this->value as $access) {
-            $result[] = $access->ofJson();
+            $accessJson = $access->ofJson();
+            $date = array_keys($accessJson)[0];
+            $result[$date] = $accessJson[$date];
         }
 
         return $result;
