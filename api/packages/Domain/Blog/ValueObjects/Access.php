@@ -23,6 +23,6 @@ final class Access {
     }
 
     public function ofJson(): array {
-        return [$this->accessDate->value()->toDate() => $this->accessesNum->value()];
+        return [$this->accessDate->value()->toDateString() => $this->accessesNum->value()];
     }
 }

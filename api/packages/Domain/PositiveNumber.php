@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Validator;
 abstract class PositiveNumber {
     protected int $value;
 
-    protected int $name;
     protected int $maxNumber;
+    protected string $name;
 
     private function __construct(int $value) {
         Validator::make(
