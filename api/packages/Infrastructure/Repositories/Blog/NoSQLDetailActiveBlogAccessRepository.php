@@ -6,6 +6,7 @@ use Aws\DynamoDb\DynamoDbClient;
 use Carbon\Carbon;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
 use Packages\Domain\Blog\Entities\DetailActiveBlogAccess;
+use Illuminate\Support\Str;
 
 final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAccessRepository {
     private DynamoDbClient $dynamoDbClient;
@@ -15,17 +16,16 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
     }
 
     public function access(DetailActiveBlogAccess $detailActiveBlogAccess): void {
-        logs()->info('ACCESS');
-
         $this->dynamoDbClient->putItem([
             'TableName' => 'blogAccesses',
             'Item'      => [
-                'id'            => ['S' => $detailActiveBlogAccess->blogId()->value()],
-                'headers'       => ['S' => $detailActiveBlogAccess->headers()->value()],
-                'userAgent'     => ['S' => $detailActiveBlogAccess->userAgent()->value()],
-                'referer'       => ['S' => $detailActiveBlogAccess->referer()->value()],
-                'from'          => ['S' => $detailActiveBlogAccess->from()->value()],
-                'accessedAt'    => ['S' => Carbon::now()->toDateTimeString()],
+                'id'                => ['S' => (string) Str::uuid()],
+                'blogId'            => ['S' => $detailActiveBlogAccess->blogId()->value()],
+                'headers'           => ['S' => $detailActiveBlogAccess->headers()->value()],
+                'userAgent'         => ['S' => $detailActiveBlogAccess->userAgent()->value()],
+                'referer'           => ['S' => $detailActiveBlogAccess->referer()->value()],
+                'from'              => ['S' => $detailActiveBlogAccess->from()->value()],
+                'accessedAt'        => ['S' => Carbon::now()->toDateTimeString()],
             ]
         ]);
     }

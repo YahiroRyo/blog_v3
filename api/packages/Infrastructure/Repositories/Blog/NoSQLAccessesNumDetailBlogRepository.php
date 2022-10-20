@@ -31,7 +31,7 @@ final class NoSQLAccessesNumDetailBlogRepository implements AccessesNumDetailBlo
 
         $response = $this->dynamoDbClient->getItem([
             'TableName'                 => 'blogAccesses',
-            'KeyConditionExpression'    => '#id = :blogId',
+            'KeyConditionExpression'    => '#blogId = :blogId',
             'ExpressionAttributeValues' => ['blogId' => $accessesNumDetailBlog->blogId()->value()],
         ]);
 
