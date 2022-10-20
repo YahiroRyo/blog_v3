@@ -6,7 +6,7 @@ services:
       context: ./client
     container_name: blog-client
     tty: true
-    command: "yarn vdev"
+    command: "yarn && yarn dev"
     environment:
       TZ: "Asia/Tokyo"
       HOST: "0.0.0.0"

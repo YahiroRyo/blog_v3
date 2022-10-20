@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\Admin\AccessesNumDetailBlogRequest;
 use App\Http\Requests\Blog\Admin\CreateBlogRequest;
 use App\Http\Requests\Blog\Admin\DeleteBlogRequest;
 use App\Http\Requests\Blog\Admin\DetailBlogRequest;
 use App\Http\Requests\Blog\Admin\EditBlogMainImageRequest;
 use App\Http\Requests\Blog\Admin\EditBlogRequest;
+use Packages\Service\Blog\Command\AccessesNumDetailBlogService;
 use Packages\Service\Blog\Command\BlogService;
 use Packages\Service\Blog\Command\DetailBlogService;
 use Packages\Service\Blog\Query\InitBlogService;
@@ -20,19 +22,22 @@ class AdminBlogController extends Controller {
     private DeleteBlogService $deleteBlogService;
     private BlogService $blogService;
     private DetailBlogService $detailBlogService;
+    private AccessesNumDetailBlogService $accessesNumDetailBlogs;
 
     public function __construct(
         InitBlogService $initBlogService,
         InProgressBlogService $inProgressBlogService,
         DeleteBlogService $deleteBlogService,
         BlogService $blogService,
-        DetailBlogService $detailBlogService
+        DetailBlogService $detailBlogService,
+        AccessesNumDetailBlogService $accessesNumDetailBlogs
     ) {
         $this->initBlogService             = $initBlogService;
         $this->inProgressBlogService       = $inProgressBlogService;
         $this->deleteBlogService           = $deleteBlogService;
         $this->blogService                 = $blogService;
         $this->detailBlogService           = $detailBlogService;
+        $this->accessesNumDetailBlogs      = $accessesNumDetailBlogs;
     }
 
     public function createBlog(CreateBlogRequest $request): void {
@@ -57,5 +62,9 @@ class AdminBlogController extends Controller {
 
     public function blog(DetailBlogRequest $request): array {
         return $this->detailBlogService->blog($request->ofDomain());
+    }
+
+    public function accessesNumBlog(AccessesNumDetailBlogRequest $request): array {
+        return $this->accessesNumDetailBlogs->get($request->ofDomain());
     }
 }
