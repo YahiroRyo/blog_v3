@@ -33,6 +33,7 @@ final class DetailActiveBlog {
         return $this->thumbnailUrl;
     }
 
+
     public function ofJson(): array {
         return [
             'title'        => $this->title->value(),
