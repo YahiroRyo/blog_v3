@@ -39,7 +39,10 @@ const AccessesNumBlogGraphContainer = () => {
     return result;
   };
 
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/${router.query.blogId}`, fecher);
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/${router.query.blogId}/accessesNum`,
+    fecher,
+  );
 
   if (error) return <>error</>;
   if (!data) return <>loading...</>;
