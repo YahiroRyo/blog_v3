@@ -21,10 +21,10 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
             'Key'       => [
                 'name'  => ['S' => 'sequence'],
             ],
-            'UpdateExpression' => 'SET #currentNumber = #currentNumber + :val',
+            'UpdateExpression'          => 'SET #currentNumber = #currentNumber + :val',
             'ExpressionAttributeNames'  => ['#currentNumber' => 'currentNumber'],
             'ExpressionAttributeValues' => [':val' => ['N' => '1']],
-            'ReturnValues' => 'UPDATED_NEW'
+            'ReturnValues'              => 'UPDATED_NEW'
         ]);
 
         $this->dynamoDbClient->putItem([

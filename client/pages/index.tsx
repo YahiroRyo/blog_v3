@@ -5,7 +5,7 @@ import SiteContainer from '../components/organisms/ContainerComponents/Layout/Si
 
 const Home: NextPage = () => {
   return (
-    <SiteContainer>
+    <SiteContainer useResize>
       <Head>
         <title>ブログ一覧 | rm -rf /</title>
       </Head>

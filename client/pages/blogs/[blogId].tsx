@@ -12,7 +12,7 @@ type BlogProps = DetailActiveBlogMeta & {
 
 const Blog = ({ title, body, thumbnail, mainImage, description, error }: BlogProps) => {
   return (
-    <SiteContainer>
+    <SiteContainer useResize>
       {error === '' ? (
         <ActiveBlogContainer
           title={title}
