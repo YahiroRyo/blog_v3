@@ -11,7 +11,7 @@ const AccessesNumBlogGraphContainer = () => {
 
     const start = new Date();
     const end = new Date();
-    end.setMonth(start.getMonth() + 1);
+    start.setMonth(start.getMonth() - 1);
 
     const accessesNum = (
       await axios.get<{ [date: string]: number }>(

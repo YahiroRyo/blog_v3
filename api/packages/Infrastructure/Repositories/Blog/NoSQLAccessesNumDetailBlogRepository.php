@@ -30,13 +30,28 @@ final class NoSQLAccessesNumDetailBlogRepository implements AccessesNumDetailBlo
         }
 
         $response = $this->dynamoDbClient->getItem([
+            'TableName' => 'blogAccessesSequence',
+            'Key'       => [
+                'name'  => ['S' => 'sequence'],
+            ]
+        ]);
+
+        $response = $this->dynamoDbClient->scan([
             'TableName'                 => 'blogAccesses',
-            'KeyConditionExpression'    => '#blogId = :blogId',
-            'ExpressionAttributeValues' => ['blogId' => $accessesNumDetailBlog->blogId()->value()],
+            'FilterExpression'          => '#id BETWEEN :fromId AND :toId AND #blogId = :blogId',
+            'ExpressionAttributeNames'  => [
+                '#id'       => 'id',
+                '#blogId'   => 'blogId'
+            ],
+            'ExpressionAttributeValues' => [
+                ':fromId'               => ['N' => '1'],
+                ':toId'                 => ['N' => $response['Item']['currentNumber']['N']],
+                ':blogId'               => ['S' => $accessesNumDetailBlog->blogId()->value()]
+            ]
         ]);
 
         foreach ($response['Items'] as $item) {
-            $result = $result->increment(AccessDate::of($item['accessedAt']));
+            $result = $result->increment(AccessDate::of($item['accessedAt']['S']));
         }
 
         return $result;
