@@ -5,7 +5,7 @@ import SiteContainer from '../../../components/organisms/ContainerComponents/Lay
 
 const Index: NextPage = () => {
   return (
-    <SiteContainer>
+    <SiteContainer useResize>
       <LinkButton type='button' href='/admin/blogs/create'>
         ブログを作成
       </LinkButton>

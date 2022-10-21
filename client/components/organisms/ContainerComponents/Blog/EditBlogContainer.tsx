@@ -87,7 +87,7 @@ const EditBlogContainer = () => {
         );
 
         setTitle(response.data.title);
-        setBody(response.data.title);
+        setBody(response.data.body);
         setMainImageBase64(response.data.mainImage);
         setIsActive(response.data.isActive);
       } catch (e) {
