@@ -29,7 +29,8 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
     const before = (value as string).substring(1, cursorPos);
     const after = (value as string).substring(cursorPos, (value as string).length - 1);
 
-    const contents = before + `${before.length ? '\n' : ''}${uploadImageText}${after.length ? '\n' : ''}` + after;
+    const beforeLines = before.split('\n');
+    const contents = before + `${beforeLines[beforeLines.length - 1].length ? '\n' : ''}${uploadImageText}` + after;
     setValue(contents);
 
     return {
