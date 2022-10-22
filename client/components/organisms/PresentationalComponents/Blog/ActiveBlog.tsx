@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { DetailActiveBlogMeta } from '../../../../types/Blog/DetailActiveBlogMeta';
 import Title from '../../../atoms/Text/Title';
+import 'highlight.js/styles/github.css';
 
 const ActiveBlog = ({ title, body, thumbnail, mainImage, description }: DetailActiveBlogMeta) => {
   return (

@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import { DetailBlog } from '../../../../types/Blog/DetailBlog';
 import LinkButton from '../../../atoms/Button/LinkButton';
+import useSyntaxHighlight from '../../../atoms/SyntaxHighlight/syntaxHighlight';
 import Text from '../../../atoms/Text/Text';
 import Title from '../../../atoms/Text/Title';
 
 const Blog = ({ title, body, mainImage, blogId, isActive }: DetailBlog) => {
+  useSyntaxHighlight();
+
   return (
     <>
       <LinkButton type='button' href={`/admin/blogs/edit/${blogId}`}>
