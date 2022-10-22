@@ -52,7 +52,15 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
         const formData = new FormData();
         formData.append('image', imageFile);
 
-        const response = await axios.post<string>(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/image`, formData);
+        const response = await axios.post<string>(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/image`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+            },
+          },
+        );
 
         const dirs = response.data.split('/');
         setValue(contents.replace(uploadImageText, `![${dirs[dirs.length - 1]}](${response.data})`));
