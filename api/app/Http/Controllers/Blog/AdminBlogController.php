@@ -9,12 +9,14 @@ use App\Http\Requests\Blog\Admin\DeleteBlogRequest;
 use App\Http\Requests\Blog\Admin\DetailBlogRequest;
 use App\Http\Requests\Blog\Admin\EditBlogMainImageRequest;
 use App\Http\Requests\Blog\Admin\EditBlogRequest;
+use App\Http\Requests\Blog\Admin\UploadImageRequest;
 use Packages\Service\Blog\Command\AccessesNumDetailBlogService;
 use Packages\Service\Blog\Command\BlogService;
 use Packages\Service\Blog\Command\DetailBlogService;
 use Packages\Service\Blog\Query\InitBlogService;
 use Packages\Service\Blog\Query\InProgressBlogService;
 use Packages\Service\Blog\Query\DeleteBlogService;
+use Packages\Service\Blog\Query\UploadImageService;
 
 class AdminBlogController extends Controller {
     private InitBlogService $initBlogService;
@@ -23,6 +25,7 @@ class AdminBlogController extends Controller {
     private BlogService $blogService;
     private DetailBlogService $detailBlogService;
     private AccessesNumDetailBlogService $accessesNumDetailBlogs;
+    private UploadImageService $uploadImageService;
 
     public function __construct(
         InitBlogService $initBlogService,
@@ -30,7 +33,8 @@ class AdminBlogController extends Controller {
         DeleteBlogService $deleteBlogService,
         BlogService $blogService,
         DetailBlogService $detailBlogService,
-        AccessesNumDetailBlogService $accessesNumDetailBlogs
+        AccessesNumDetailBlogService $accessesNumDetailBlogs,
+        UploadImageService $uploadImageService
     ) {
         $this->initBlogService             = $initBlogService;
         $this->inProgressBlogService       = $inProgressBlogService;
@@ -38,6 +42,7 @@ class AdminBlogController extends Controller {
         $this->blogService                 = $blogService;
         $this->detailBlogService           = $detailBlogService;
         $this->accessesNumDetailBlogs      = $accessesNumDetailBlogs;
+        $this->uploadImageService          = $uploadImageService;
     }
 
     public function createBlog(CreateBlogRequest $request): void {
@@ -54,6 +59,10 @@ class AdminBlogController extends Controller {
 
     public function deleteBlog(DeleteBlogRequest $request): void {
         $this->deleteBlogService->deleteBlog($request->ofDomain());
+    }
+
+    public function uploadImage(UploadImageRequest $uploadImageRequest): string {
+        return $this->uploadImageService->upload($uploadImageRequest->ofDomain());
     }
 
     public function blogList(): array {

@@ -5,7 +5,6 @@ namespace Packages\Domain\Aws\Image\Entities;
 use Intervention\Image\Image;
 use Packages\Domain\Aws\Image\ValueObjects\FileName;
 use Packages\Domain\Aws\Image\ValueObjects\Path;
-use Packages\Domain\Aws\Image\ValueObjects\Quality;
 
 final class InitUploadImage {
     private Image $image;
