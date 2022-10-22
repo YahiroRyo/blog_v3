@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DetailActiveBlogMeta } from '../../../../types/Blog/DetailActiveBlogMeta';
 import useSyntaxHighlight from '../../../atoms/SyntaxHighlight/syntaxHighlight';
 import ActiveBlog from '../../PresentationalComponents/Blog/ActiveBlog';
@@ -6,15 +6,22 @@ import ActiveBlog from '../../PresentationalComponents/Blog/ActiveBlog';
 const ActiveBlogContainer = (preProps: DetailActiveBlogMeta) => {
   useSyntaxHighlight();
 
-  const [props, setProps] = useState<DetailActiveBlogMeta>({
-    title: preProps.title,
-    body: preProps.body,
-    description: preProps.description,
-    thumbnail: preProps.thumbnail,
-    mainImage: preProps.mainImage,
-  });
+  const [image, setImage] = useState<string>('');
 
-  return <ActiveBlog {...props} />;
+  useEffect(() => {
+    const images = document.querySelectorAll('img');
+    images.forEach((image) => {
+      image.addEventListener('click', () => {
+        setImage(image.src.replace('/thumb', ''));
+      });
+    });
+  }, []);
+
+  return (
+    <>
+      <ActiveBlog {...preProps} image={image} setImage={setImage} />
+    </>
+  );
 };
 
 export default ActiveBlogContainer;

@@ -3,8 +3,17 @@ import Image from 'next/image';
 import { DetailActiveBlogMeta } from '../../../../types/Blog/DetailActiveBlogMeta';
 import Title from '../../../atoms/Text/Title';
 import 'highlight.js/styles/github.css';
+import ImageModal from '../../../molecules/Modal/ImageModal';
 
-const ActiveBlog = ({ title, body, thumbnail, mainImage, description }: DetailActiveBlogMeta) => {
+const ActiveBlog = ({
+  title,
+  body,
+  thumbnail,
+  mainImage,
+  description,
+  image,
+  setImage,
+}: DetailActiveBlogMeta & { image?: string; setImage: (value: string) => void }) => {
   return (
     <>
       <Head>
@@ -22,6 +31,7 @@ const ActiveBlog = ({ title, body, thumbnail, mainImage, description }: DetailAc
         <meta name='theme-color' content='#f8f8f8' />
       </Head>
       <Title>{title}</Title>
+      {image ? <ImageModal onClose={() => setImage('')} width={800} height={450} alt={''} src={image} /> : <></>}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Image src={mainImage} width={800} height={450} alt={`${title}のメインイメージ`} />
       </div>
