@@ -5,6 +5,8 @@ namespace Packages\Infrastructure\Repositories\Blog;
 use Aws\DynamoDb\DynamoDbClient;
 
 use Carbon\Carbon;
+use DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
 use Packages\Domain\Blog\Entities\DetailActiveBlogAccess;
 
@@ -16,6 +18,19 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
     }
 
     public function access(DetailActiveBlogAccess $detailActiveBlogAccess): void {
+        $blog = DB::selectOne('
+            SELECT
+                blogId
+            FROM
+                blogs
+            WHERE
+                blogId = ?
+        ', [$detailActiveBlogAccess->blogId()->value()]);
+
+        if (!$blog) {
+            throw new ModelNotFoundException('ブログが存在しません');
+        }
+
         $response = $this->dynamoDbClient->updateItem([
             'TableName' => 'blogAccessesSequence',
             'Key'       => [

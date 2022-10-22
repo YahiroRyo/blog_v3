@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { marked } from 'marked';
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import ActiveBlogContainer from '../../components/organisms/ContainerComponents/Blog/ActiveBlogContainer';
 import SiteContainer from '../../components/organisms/ContainerComponents/Layout/SiteContainer';
 import { DetailActiveBlog } from '../../types/Blog/DetailActiveBlog';
@@ -30,7 +30,7 @@ const Blog = ({ title, body, thumbnail, mainImage, description, error }: BlogPro
 
 export default Blog;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   let result: BlogProps = {
     title: '',
     body: '',
@@ -42,26 +42,32 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
     const response = await axios.get<DetailActiveBlog>(
-      `${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.query.blogId}`,
+      `${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.params?.blogId}`,
     );
     result.title = response.data.title;
     result.body = marked(response.data.body);
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
     result.description = response.data.body.replaceAll('#', '');
-
-    await axios.post(`${process.env.NEXT_PUBLIC_SSR_API_URL}/api/blogs/${context.query.blogId}/access`, {
-      headers: JSON.stringify(context.req.headers) ?? '',
-      userAgent: context.req.headers['user-agent'] ?? '',
-      referer: context.req.headers.referer ?? '',
-      from: context.req.headers.from ?? '',
-    });
   } catch (e) {
     console.error(e);
     result.error = '存在しないブログです';
+
+    return {
+      props: result,
+      revalidate: 1,
+    };
   }
 
   return {
     props: result,
+    revalidate: 1000 * 60 * 60 * 24 * 3,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
   };
 };
