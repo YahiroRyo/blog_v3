@@ -1,24 +1,24 @@
 import { CSSProperties } from 'react';
 import { color } from '../../../styles/color';
 
-type TextProps = {
-  children?: React.ReactNode;
+type HtmlTextProps = {
+  html: string;
   style?: CSSProperties;
 };
 
-const Text = ({ children, style }: TextProps) => {
+const HtmlText = ({ html, style }: HtmlTextProps) => {
   return (
     <p
+      className='markdown-body'
       style={{
         fontSize: '1rem',
         margin: 0,
         color: color.black,
         ...style,
       }}
-    >
-      {children}
-    </p>
+      dangerouslySetInnerHTML={{ __html: html }}
+    ></p>
   );
 };
 
-export default Text;
+export default HtmlText;
