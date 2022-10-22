@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@types/marked": "^4.0.7",
+    "@vespaiach/axios-fetch-adapter": "^0.3.1",
     "axios": "^1.1.2",
     "echarts": "^5.4.0",
     "echarts-for-react": "^3.0.2",
