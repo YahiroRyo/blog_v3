@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { DetailActiveBlogMeta } from '../../../../types/Blog/DetailActiveBlogMeta';
+import useSyntaxHighlight from '../../../atoms/SyntaxHighlight/syntaxHighlight';
 import ActiveBlog from '../../PresentationalComponents/Blog/ActiveBlog';
 
 const ActiveBlogContainer = (preProps: DetailActiveBlogMeta) => {
-  const router = useRouter();
+  useSyntaxHighlight();
 
   const [props, setProps] = useState<DetailActiveBlogMeta>({
     title: preProps.title,
