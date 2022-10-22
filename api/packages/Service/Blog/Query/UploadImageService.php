@@ -27,7 +27,7 @@ final class UploadImageService {
         $image = new InitUploadImage(
             $initBlogImage->thumbnail()->value(),
             Path::of($imageStoragePath->mainImageStoragePath()),
-            FileName::of('')
+            $thumbnail->fileName()
         );
 
         $tmpThumbnailFile = $this->uploadImage->tmpSaveImageFile($thumbnail);
