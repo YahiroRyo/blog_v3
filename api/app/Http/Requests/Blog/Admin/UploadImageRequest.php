@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Blog\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Packages\Domain\Base64;
 use Packages\Domain\Blog\Entities\InitBlogImage;
 use Packages\Domain\Blog\ValueObjects\BlogImage;
 use Packages\Domain\Blog\ValueObjects\BlogThumbnail;

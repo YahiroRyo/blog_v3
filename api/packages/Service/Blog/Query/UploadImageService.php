@@ -25,7 +25,7 @@ final class UploadImageService {
             FileName::of('')
         );
         $image = new InitUploadImage(
-            $initBlogImage->thumbnail()->value(),
+            $initBlogImage->image()->value(),
             Path::of($imageStoragePath->mainImageStoragePath()),
             $thumbnail->fileName()
         );
