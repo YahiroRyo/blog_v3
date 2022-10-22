@@ -33,7 +33,7 @@ package:
 functions:
   web:
     handler: public/index.php
-    timeout: 28
+    timeout: 120
     layers:
       - ${bref-extra:gd-php-81}
       - ${bref:layer.php-81-fpm}
