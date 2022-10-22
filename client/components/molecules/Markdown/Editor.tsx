@@ -45,42 +45,14 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
       e.preventDefault();
 
       const imageFile = item.getAsFile()!;
-      const reader = new FileReader();
 
       const { contents, uploadImageText } = setUploadingTextToValue();
 
-      reader.onload = async (e) => {
-        try {
-          const response = await axios.post<string>(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/image`, {
-            image: e.target!.result,
-          });
-
-          const dirs = response.data.split('/');
-          setValue(contents.replace(uploadImageText, `![${dirs[dirs.length - 1]}](${response.data})`));
-        } catch (e) {
-          console.log(e);
-          setValue(contents.replace(uploadImageText, `![不明なエラーが発生しました]()`));
-        }
-      };
-
-      reader.readAsDataURL(imageFile);
-      return;
-    }
-  };
-
-  const onDrop = async (e: DragEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-
-    const item = e.dataTransfer.files[0];
-    const reader = new FileReader();
-
-    const { contents, uploadImageText } = setUploadingTextToValue();
-
-    reader.onload = async (e) => {
       try {
-        const response = await axios.post<string>(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/image`, {
-          image: e.target!.result,
-        });
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        const response = await axios.post<string>(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/image`, formData);
 
         const dirs = response.data.split('/');
         setValue(contents.replace(uploadImageText, `![${dirs[dirs.length - 1]}](${response.data})`));
@@ -88,10 +60,28 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
         console.log(e);
         setValue(contents.replace(uploadImageText, `![不明なエラーが発生しました]()`));
       }
-    };
+    }
+  };
 
-    reader.readAsDataURL(item);
-    return;
+  const onDrop = async (e: DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+
+    const item = e.dataTransfer.files[0];
+
+    const { contents, uploadImageText } = setUploadingTextToValue();
+
+    try {
+      const formData = new FormData();
+      formData.append('image', item);
+
+      const response = await axios.post<string>(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/image`, formData);
+
+      const dirs = response.data.split('/');
+      setValue(contents.replace(uploadImageText, `![${dirs[dirs.length - 1]}](${response.data})`));
+    } catch (e) {
+      console.log(e);
+      setValue(contents.replace(uploadImageText, `![不明なエラーが発生しました]()`));
+    }
   };
 
   return (

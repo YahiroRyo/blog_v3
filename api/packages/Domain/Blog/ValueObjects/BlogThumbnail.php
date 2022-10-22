@@ -2,9 +2,9 @@
 
 namespace Packages\Domain\Blog\ValueObjects;
 
-use Packages\Domain\Base64Image;
+use Packages\Domain\Image;
 
-final class BlogThumbnail extends Base64Image {
+final class BlogThumbnail extends Image {
     protected int $width   = 800;
     protected int $height  = 450;
     protected int $maxSize = 5120;
