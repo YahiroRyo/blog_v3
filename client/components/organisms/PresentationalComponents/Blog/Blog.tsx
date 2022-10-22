@@ -4,6 +4,7 @@ import LinkButton from '../../../atoms/Button/LinkButton';
 import useSyntaxHighlight from '../../../atoms/SyntaxHighlight/syntaxHighlight';
 import Text from '../../../atoms/Text/Text';
 import Title from '../../../atoms/Text/Title';
+import 'highlight.js/styles/github.css';
 
 const Blog = ({ title, body, mainImage, blogId, isActive }: DetailBlog) => {
   useSyntaxHighlight();
