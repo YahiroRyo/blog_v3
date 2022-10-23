@@ -25,7 +25,7 @@ final class DetailActiveBlogService {
     }
 
     public function detialActiveBlogAccess(DetailActiveBlogAccess $detailActiveBlogAccess): void {
-        if (!Cookie::get("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}")) {
+        if (Cookie::get("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}")) {
             return;
         }
 
