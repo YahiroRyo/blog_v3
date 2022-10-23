@@ -35,7 +35,7 @@ abstract class Image {
             }
         )
         ->resizeCanvas($this->width, $this->height)
-        ->encode('jpeg', $this->quality);
+        ->encode('webp', $this->quality);
     }
 
     public function value(): InterventionImageType {

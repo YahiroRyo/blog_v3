@@ -7,6 +7,7 @@ use Aws\DynamoDb\DynamoDbClient;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Cookie;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
 use Packages\Domain\Blog\Entities\DetailActiveBlogAccess;
 
@@ -30,6 +31,8 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
         if (!$blog) {
             throw new ModelNotFoundException('ブログが存在しません');
         }
+
+        Cookie::queue("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}", 'accessed', 30);
 
         $response = $this->dynamoDbClient->updateItem([
             'TableName' => 'blogAccessesSequence',

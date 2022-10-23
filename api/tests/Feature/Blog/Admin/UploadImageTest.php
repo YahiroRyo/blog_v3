@@ -11,11 +11,8 @@ class UploadImageTest extends BlogTestCase {
         Storage::fake('files');
         $image = UploadedFile::fake()->image('dummy.jpg', 800, 800);
 
-        $imageData   = file_get_contents($image->path());
-        $imageBase64 = 'data:'.$image->getMimeType() . ';base64,' . base64_encode($imageData);
-
         $response = $this->post('/api/admin/blogs/image', [
-            'image' => $imageBase64
+            'image' => $image
         ]);
         $response->assertOk();
     }
