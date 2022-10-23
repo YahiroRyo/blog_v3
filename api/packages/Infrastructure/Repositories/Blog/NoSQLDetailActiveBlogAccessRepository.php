@@ -31,6 +31,8 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
             throw new ModelNotFoundException('ブログが存在しません');
         }
 
+        cookie()->queue("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}", 'accessed', 30);
+
         $response = $this->dynamoDbClient->updateItem([
             'TableName' => 'blogAccessesSequence',
             'Key'       => [

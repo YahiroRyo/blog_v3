@@ -24,6 +24,10 @@ final class DetailActiveBlogService {
     }
 
     public function detialActiveBlogAccess(DetailActiveBlogAccess $detailActiveBlogAccess): void {
+        if (cookie()->has("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}")) {
+            return;
+        }
+
         $this->detailActiveBlogAccessRepository->access($detailActiveBlogAccess);
     }
 }
