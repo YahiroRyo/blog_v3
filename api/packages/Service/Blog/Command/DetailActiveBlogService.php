@@ -2,7 +2,6 @@
 
 namespace Packages\Service\Blog\Command;
 
-use Illuminate\Support\Facades\Cookie;
 use Packages\Domain\Blog\Entities\DetailActiveBlogAccess;
 use Packages\Domain\Blog\ValueObjects\BlogId;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
@@ -25,7 +24,7 @@ final class DetailActiveBlogService {
     }
 
     public function detialActiveBlogAccess(DetailActiveBlogAccess $detailActiveBlogAccess): void {
-        if (Cookie::get("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}")) {
+        if (session()->has("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}") && session()->get("accessed/blogs/{$detailActiveBlogAccess->blogId()->value()}")) {
             return;
         }
 
