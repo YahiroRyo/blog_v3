@@ -63,7 +63,7 @@ functions:
       APP_NAME: Blog
       APP_ENV: production
 
-      SANCTUM_STATEFUL_DOMAINS: yappi.jp
+      SANCTUM_STATEFUL_DOMAINS: www.yappi.jp:443
       SESSION_DOMAIN: .yappi.jp
 
       LOG_CHANNEL: stderr
