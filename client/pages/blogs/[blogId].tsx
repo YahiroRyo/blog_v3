@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     result.body = marked(response.data.body);
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
-    result.description = response.data.body.replaceAll('#', '');
+    result.description = response.data.body.replaceAll('#', '').replaceAll('\n', ' ');
   } catch (e) {
     console.error(e);
     result.error = '存在しないブログです';

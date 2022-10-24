@@ -21,11 +21,14 @@ const ActiveBlog = ({
         <meta name='description' content={description} />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@yappi_chmod_777' />
+        <meta name='twitter:creator' content='@yappi_chmod_777' />
+        <meta name='twitter:domain' content='https://www.yappi.jp' />
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={description} />
         <meta name='og:title' content={title} />
         <meta property='og:type' content='website' />
-        <meta name='og:url' content='https://yappi.jp' />
+        <meta name='og:site_name' content='yappiのゴミ箱 | rm -rf /' />
+        <meta name='og:url' content='https://www.yappi.jp' />
         <meta name='og:image' content={thumbnail} />
         <meta name='og:description' content={description} />
         <meta name='theme-color' content='#f8f8f8' />
