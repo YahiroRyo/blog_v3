@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import CreateUserForm from '../../PresentationalComponents/Auth/CreateUserForm';
 

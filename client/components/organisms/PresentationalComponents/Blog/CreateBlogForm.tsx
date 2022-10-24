@@ -5,6 +5,7 @@ import ErrorText from '../../../atoms/Text/ErrorText';
 import FileUploadGroup from '../../../molecules/Input/FileUploadGroup';
 import InputGroup from '../../../molecules/Input/InputGroup';
 import TextAreaGroup from '../../../molecules/Input/TextAreaGroup';
+import PreviewMarkdown from '../../../molecules/Markdown/PreviewMarkdown';
 
 type CreateBlogFormProps = {
   title: string;
@@ -43,7 +44,7 @@ const CreateBlogForm = ({
       <FileUploadGroup style={{ marginTop: '1rem' }} setValue={setMainImage}>
         メインイメージをアップロード
       </FileUploadGroup>
-      <TextAreaGroup style={{ marginTop: '1rem' }} label='ブログ内容' value={body} setValue={setBody} />
+      <PreviewMarkdown style={{ marginTop: '1rem' }} markdown={body} setMarkdown={setBody} />
       <ErrorText>{error}</ErrorText>
       <Button style={{ marginTop: '1rem' }} type='submit'>
         ブログ作成
