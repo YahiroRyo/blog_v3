@@ -11,9 +11,8 @@ const AccessesNumBlogGraphContainer = () => {
 
     const start = new Date();
     const end = new Date();
-    start.setTime(start.getTime() + 1000 * 60 * 60 * 9);
     start.setMonth(start.getMonth() - 1);
-    end.setTime(end.getTime() + 1000 * 60 * 60 * 9);
+    end.setHours(end.getHours() * 9);
 
     const accessesNum = (
       await axios.get<{ [date: string]: number }>(
