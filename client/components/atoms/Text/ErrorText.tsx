@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { color } from '../../../styles/color';
 
 type ErrorTextProps = {
@@ -7,11 +9,11 @@ type ErrorTextProps = {
 const ErrorText = ({ children }: ErrorTextProps) => {
   return (
     <p
-      style={{
-        color: color.danger,
-        fontSize: '1rem',
-        fontWeight: 'bold',
-      }}
+      css={css`
+        color: ${color.danger};
+        font-size: 1rem;
+        font-weight: bold;
+      `}
     >
       {children}
     </p>

@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { color } from '../../../../styles/color';
 
@@ -33,8 +35,21 @@ const Site = ({ children, useResize }: SiteProps) => {
   }, []);
 
   return (
-    <main style={{ backgroundColor: color.whiteDark, minHeight: 'calc(100vh - 5rem)' }}>
-      <div style={{ width: width, margin: '0 auto', padding: '2rem 0' }}>{children}</div>
+    <main
+      css={css`
+        background-color: ${color.whiteDark};
+        min-height: calc(100vh - 5rem);
+      `}
+    >
+      <div
+        css={css`
+          width: ${width};
+          margin: 0 auto;
+          padding: 2rem 0;
+        `}
+      >
+        {children}
+      </div>
     </main>
   );
 };

@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { Blog } from '../../../../types/Blog/Blog';
 import BlogCard from './BlogCard';
 
@@ -9,7 +11,13 @@ const BlogCardList = ({ blogList }: BlogCardListProps) => {
   return (
     <>
       {blogList.map((blog: any, key: number) => (
-        <BlogCard style={{ margin: '2rem 0' }} key={key} {...blog} />
+        <BlogCard
+          style={css`
+            margin: 2rem 0;
+          `}
+          key={key}
+          {...blog}
+        />
       ))}
     </>
   );

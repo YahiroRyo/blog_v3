@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { CSSProperties } from 'react';
 import TextArea from '../../atoms/Input/TextArea';
 import Label from '../../atoms/Text/Label';
@@ -14,7 +16,10 @@ const TextAreaGroup = ({ label, value, setValue, style }: TextAreaGroupProps) =>
     <div style={style}>
       <Label>{label}</Label>
       <TextArea
-        style={{ marginTop: '0.5rem', width: '100%' }}
+        style={css`
+          margin-top: 0.5rem;
+          width: 100%;
+        `}
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />

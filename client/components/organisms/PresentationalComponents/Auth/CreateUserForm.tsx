@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { FormEvent } from 'react';
 import Button from '../../../atoms/Button/Button';
 import ErrorText from '../../../atoms/Text/ErrorText';
@@ -18,13 +20,22 @@ const CreateUserForm = ({ error, email, password, setEmail, setPassword, submit 
       <InputGroup type='email' label='メールアドレス' value={email} setValue={setEmail} />
       <InputGroup
         type='password'
-        style={{ marginTop: '1rem' }}
+        style={css`
+          margin-top: 1rem;
+        `}
         label='パスワード'
         value={password}
         setValue={setPassword}
       />
       <ErrorText>{error}</ErrorText>
-      <Button type='submit' style={{ display: 'flex', marginTop: '1rem', marginLeft: 'auto' }}>
+      <Button
+        type='submit'
+        style={css`
+          display: flex;
+          margin-top: 1rem;
+          margin-left: auto;
+        `}
+      >
         ユーザー作成
       </Button>
     </form>

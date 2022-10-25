@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { color } from '../../../../styles/color';
 import { NavItem } from '../../../../types/Layout/NavItem';
 import Logo from '../../../molecules/Layout/Logo';
@@ -18,14 +20,14 @@ const LoggedInHeader = () => {
   return (
     <header style={{ height: '5rem', backgroundColor: color.white, width: '100%' }}>
       <div
-        style={{
-          width: '80%',
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '100%',
-        }}
+        css={css`
+          width: 80%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 100%;
+        `}
       >
         <Logo />
         <Navigation items={navigationItems} />

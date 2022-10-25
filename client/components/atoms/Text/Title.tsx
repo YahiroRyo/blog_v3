@@ -1,21 +1,22 @@
-import { CSSProperties } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
 import { color } from '../../../styles/color';
 
 type TitleProps = {
   children: React.ReactNode;
-  style?: CSSProperties;
+  style?: SerializedStyles;
 };
 
 const Title = ({ children, style }: TitleProps) => {
   return (
     <h1
-      style={{
-        ...style,
-        fontSize: '1.5rem',
-        color: color.black,
-        lineHeight: '1.75',
-        margin: '0',
-      }}
+      css={css`
+        font-size: 1.5rem;
+        color: ${color.black};
+        line-height: 1.75;
+        margin: 0;
+        ${style}
+      `}
     >
       {children}
     </h1>

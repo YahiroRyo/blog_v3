@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { color } from '../../../styles/color';
 
 type LergeTitleProps = {
@@ -5,7 +7,18 @@ type LergeTitleProps = {
 };
 
 const LergeTitle = ({ children }: LergeTitleProps) => {
-  return <p style={{ color: color.black, fontWeight: 'bold', fontSize: '2rem', margin: 0 }}>{children}</p>;
+  return (
+    <p
+      css={css`
+        color: ${color.black};
+        font-weight: bold;
+        font-size: 2rem;
+        margin: 0;
+      `}
+    >
+      {children}
+    </p>
+  );
 };
 
 export default LergeTitle;

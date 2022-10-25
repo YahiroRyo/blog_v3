@@ -1,4 +1,5 @@
-import { CSSProperties } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
 import RadioButton from '../../atoms/Input/RadioButton';
 
 type Value = {
@@ -10,15 +11,21 @@ type RadioButtonGroupProps = {
   values: Value[];
   state: any;
   name: string;
-  style?: CSSProperties;
+  style?: SerializedStyles;
   setState: (state: string) => void;
 };
 
 const RadioButtonGroup = ({ values, state, name, style, setState }: RadioButtonGroupProps) => {
   return (
-    <div style={style}>
+    <div css={style}>
       {values.map((item, index) => (
-        <label key={index} style={{ display: 'flex', columnGap: '.25rem' }}>
+        <label
+          key={index}
+          css={css`
+            display: flex;
+            column-gap: 0.25rem;
+          `}
+        >
           <RadioButton
             name={name}
             value={item.value}

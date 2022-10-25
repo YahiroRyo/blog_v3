@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { color } from '../../../styles/color';
 
 type LabelProps = {
@@ -8,10 +10,10 @@ const Label = ({ children }: LabelProps) => {
   return (
     <>
       <label
-        style={{
-          color: color.black,
-          fontSize: '1rem',
-        }}
+        css={css`
+          color: ${color.black};
+          font-size: 1rem;
+        `}
       >
         {children}
       </label>

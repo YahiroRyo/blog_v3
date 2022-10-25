@@ -1,8 +1,11 @@
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
 import axios from 'axios';
 import { ClipboardEvent, ComponentProps, DragEvent, useRef } from 'react';
 
 type EditorProps = {
   setValue: (value: string) => void;
+  style?: SerializedStyles;
 } & ComponentProps<'textarea'>;
 
 const generateRandomString = (num: number) => {
@@ -99,7 +102,13 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
 
   return (
     <textarea
-      style={{ display: 'block', minHeight: '15rem', padding: '1rem', lineHeight: '1.5', ...style }}
+      css={css`
+        display: block;
+        min-height: 15rem;
+        padding: 1rem;
+        line-height: 1.5;
+        ${style}
+      `}
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onPaste={onPaste}

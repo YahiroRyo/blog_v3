@@ -1,15 +1,23 @@
-import { ChangeEvent, CSSProperties } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
+import { ChangeEvent } from 'react';
 
 type TextAreaProps = {
   value: string;
-  style?: CSSProperties;
+  style?: SerializedStyles;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const TextArea = ({ value, style, onChange }: TextAreaProps) => {
   return (
     <textarea
-      style={{ display: 'block', minHeight: '15rem', padding: '1rem', lineHeight: '1.5', ...style }}
+      css={css`
+        display: block;
+        min-height: 15rem;
+        padding: 1rem;
+        line-height: 1.5;
+        ${style}
+      `}
       value={value}
       onChange={onChange}
     ></textarea>
