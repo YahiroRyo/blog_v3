@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CSSProperties } from 'react';
 import { color } from '../../../../styles/color';
 import Text from '../../../atoms/Text/Text';
 import Title from '../../../atoms/Text/Title';
@@ -10,28 +11,31 @@ type BlogCardProps = {
   title: string;
   thumbnail: string;
   isActive: boolean;
-  style?: CSSProperties;
+  style?: SerializedStyles;
 };
 
 const BlogCard = ({ blogId, title, thumbnail, isActive, style }: BlogCardProps) => {
   return (
     <article
-      style={{
-        ...style,
-        borderRadius: '3rem',
-        boxShadow: isActive ? '0.8rem 0.8rem 2rem rgba(0, 0, 0, .25)' : '',
-      }}
+      css={css`
+        ${style}
+        border-radius: 3rem;
+        box-shadow: ${isActive ? '0.8rem 0.8rem 2rem rgba(0, 0, 0, .25)' : ''};
+        &:hover {
+          cursor: pointer;
+        }
+      `}
     >
       <Link href={`/admin/blogs/${blogId}`}>
         <a
-          style={{
-            backgroundColor: isActive ? color.white : color.gray,
-            borderRadius: '1rem',
-            padding: '2rem',
-            display: 'flex',
-            columnGap: '2rem',
-            textDecoration: 'none',
-          }}
+          css={css`
+            background-color: ${isActive ? color.white : color.gray};
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            column-gap: 2rem;
+            text-decoration: none;
+          `}
         >
           <Image src={thumbnail} width={400} height={225} alt={`${title}のサムネイル`} />
           <div>

@@ -1,20 +1,22 @@
-import { CSSProperties } from 'react';
+/** @jsxImportSource @emotion/react */
+
+import { css, SerializedStyles } from '@emotion/react';
 import { color } from '../../../styles/color';
 
 type TextProps = {
   children?: React.ReactNode;
-  style?: CSSProperties;
+  style?: SerializedStyles;
 };
 
 const Text = ({ children, style }: TextProps) => {
   return (
     <p
-      style={{
-        fontSize: '1rem',
-        margin: 0,
-        color: color.black,
-        ...style,
-      }}
+      css={css`
+        font-size: 1rem;
+        margin: 0;
+        color: ${color.black};
+        ${style}
+      `}
     >
       {children}
     </p>

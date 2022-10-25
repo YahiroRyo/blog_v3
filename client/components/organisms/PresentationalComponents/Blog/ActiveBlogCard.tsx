@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CSSProperties } from 'react';
 import { color } from '../../../../styles/color';
 import Title from '../../../atoms/Text/Title';
 
@@ -8,22 +9,33 @@ type ActiveBlogCardProps = {
   blogId: string;
   title: string;
   thumbnail: string;
-  style?: CSSProperties;
+  style?: SerializedStyles;
 };
 
 const ActiveBlogCard = ({ blogId, title, thumbnail, style }: ActiveBlogCardProps) => {
   return (
-    <article style={{ ...style, borderRadius: '3rem', boxShadow: '0.8rem 0.8rem 2rem rgba(0, 0, 0, .25)' }}>
+    <article
+      css={css`
+        ${style}
+        border-radius: 3rem;
+        box-shadow: 0.8rem 0.8rem 2rem rgba(0, 0, 0, 0.25);
+        transition: 0.1s;
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.25);
+        }
+      `}
+    >
       <Link href={`/blogs/${blogId}`}>
         <a
-          style={{
-            backgroundColor: color.white,
-            borderRadius: '1rem',
-            padding: '2rem',
-            display: 'flex',
-            columnGap: '2rem',
-            textDecoration: 'none',
-          }}
+          css={css`
+            background-color: ${color.white};
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            column-gap: 2rem;
+            text-decoration: none;
+          `}
         >
           <Image src={thumbnail} width={400} height={225} alt={`${title}のサムネイル`} />
           <Title>{title}</Title>

@@ -1,8 +1,10 @@
-import { ChangeEvent, CSSProperties, useRef } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
+import { ChangeEvent, useRef } from 'react';
 import Button from '../../atoms/Button/Button';
 
 type FileUploadGroupProps = {
-  style?: CSSProperties;
+  style?: SerializedStyles;
   setValue: (value: File) => void;
   children: React.ReactNode;
 };
@@ -17,7 +19,7 @@ const FileUploadGroup = ({ setValue, style, children }: FileUploadGroupProps) =>
   };
 
   return (
-    <div style={style}>
+    <div css={style}>
       <Button
         type='button'
         onClick={(e) => {
@@ -26,7 +28,14 @@ const FileUploadGroup = ({ setValue, style, children }: FileUploadGroupProps) =>
       >
         {children}
       </Button>
-      <input ref={fileInput} onChange={changeFile} style={{ display: 'none' }} type='file' />
+      <input
+        ref={fileInput}
+        onChange={changeFile}
+        css={css`
+          display: none;
+        `}
+        type='file'
+      />
     </div>
   );
 };

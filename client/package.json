@@ -11,6 +11,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^4.0.7",
     "@vespaiach/axios-fetch-adapter": "^0.3.1",

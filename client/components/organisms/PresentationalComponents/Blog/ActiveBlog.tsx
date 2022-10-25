@@ -1,9 +1,11 @@
+/** @jsxImportSource @emotion/react */
 import Head from 'next/head';
 import Image from 'next/image';
 import { DetailActiveBlogMeta } from '../../../../types/Blog/DetailActiveBlogMeta';
 import Title from '../../../atoms/Text/Title';
 import 'highlight.js/styles/github.css';
 import ImageModal from '../../../molecules/Modal/ImageModal';
+import { css } from '@emotion/react';
 
 const ActiveBlog = ({
   title,
@@ -35,7 +37,13 @@ const ActiveBlog = ({
       </Head>
       <Title>{title}</Title>
       {image ? <ImageModal onClose={() => setImage('')} width={800} height={450} alt={''} src={image} /> : <></>}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div
+        css={css`
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `}
+      >
         <Image src={mainImage} width={800} height={450} alt={`${title}のメインイメージ`} />
       </div>
       <div className='markdown-body' dangerouslySetInnerHTML={{ __html: body }} />

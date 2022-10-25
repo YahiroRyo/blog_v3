@@ -1,25 +1,26 @@
-import { CSSProperties } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
 
 type BackgroundImageProps = {
   backgroundImage: string;
   width: number;
   height: number;
-  style?: CSSProperties;
+  style?: SerializedStyles;
 };
 
 const BackgroundImage = ({ backgroundImage, width, height, style }: BackgroundImageProps) => {
   return (
     <div
-      style={{
-        backgroundColor: '#fff',
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        width: width,
-        height: height,
-        objectFit: 'contain',
-        ...style,
-      }}
+      css={css`
+        background-color: #fff;
+        background-image: url(${backgroundImage});
+        background-position: center;
+        background-size: cover;
+        width: ${width}px;
+        height: ${height}px;
+        object-fit: contain;
+        ${style}
+      `}
     ></div>
   );
 };

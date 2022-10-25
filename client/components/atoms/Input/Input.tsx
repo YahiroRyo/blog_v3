@@ -1,16 +1,21 @@
-import { ChangeEvent, CSSProperties } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css, SerializedStyles } from '@emotion/react';
+import { ChangeEvent } from 'react';
 
 type InputProps = {
   type: string;
   value: string;
-  style?: CSSProperties;
+  style?: SerializedStyles;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input = ({ type, value, style, onChange }: InputProps) => {
   return (
     <input
-      style={{ display: 'block', padding: '.25rem .5rem', ...style }}
+      css={css`
+        padding: 0.25rem 0.5rem;
+        ${style}
+      `}
       type={type}
       value={value}
       onChange={onChange}

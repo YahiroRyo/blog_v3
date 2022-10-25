@@ -1,14 +1,16 @@
-import { CSSProperties, useEffect, useState } from 'react';
+/** @jsxImportSource @emotion/react */
+import { useEffect, useState } from 'react';
 import { markdownOfHTML } from '../../../wasm-markdown/pkg/wasm_markdown';
 import useSyntaxHighlight from '../../atoms/SyntaxHighlight/syntaxHighlight';
 import HtmlText from '../../atoms/Text/HtmlText';
 import 'highlight.js/styles/github.css';
 import Editor from './Editor';
+import { css, SerializedStyles } from '@emotion/react';
 
 type PreviewMarkdownProps = {
   markdown: string;
   setMarkdown: (value: string) => void;
-  style?: CSSProperties;
+  style?: SerializedStyles;
 };
 
 const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps) => {
@@ -21,9 +23,28 @@ const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps)
   }, [markdown]);
 
   return (
-    <div style={{ display: 'flex', columnGap: '2rem', ...style }}>
-      <HtmlText style={{ width: '100%', backgroundColor: '#fff', padding: '2rem' }} html={html} />
-      <Editor style={{ width: '100%' }} value={markdown} setValue={setMarkdown} />
+    <div
+      css={css`
+        display: flex;
+        column-gap: 2rem;
+        ${style}
+      `}
+    >
+      <HtmlText
+        style={css`
+          width: 100%;
+          background-color: #fff;
+          padding: 2rem;
+        `}
+        html={html}
+      />
+      <Editor
+        style={css`
+          width: 100%;
+        `}
+        value={markdown}
+        setValue={setMarkdown}
+      />
     </div>
   );
 };
