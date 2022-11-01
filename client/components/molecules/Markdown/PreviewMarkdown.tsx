@@ -6,6 +6,7 @@ import HtmlText from '../../atoms/Text/HtmlText';
 import 'highlight.js/styles/github.css';
 import Editor from './Editor';
 import { css, SerializedStyles } from '@emotion/react';
+import useWindowSize from '../../atoms/Layout/windowSize';
 
 type PreviewMarkdownProps = {
   markdown: string;
@@ -15,6 +16,7 @@ type PreviewMarkdownProps = {
 
 const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps) => {
   const [html, setHtml] = useState<string>('');
+  const size = useWindowSize();
 
   useSyntaxHighlight();
 
@@ -32,18 +34,19 @@ const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps)
     >
       <HtmlText
         style={css`
-          width: 100%;
           background-color: #fff;
           padding: 2rem;
+          width: ${size.width / 2}px;
         `}
         html={html}
       />
       <Editor
-        style={css`
-          width: 100%;
-        `}
         value={markdown}
         setValue={setMarkdown}
+        style={css`
+          width: ${size.width / 2}px;
+          height: 100%;
+        `}
       />
     </div>
   );

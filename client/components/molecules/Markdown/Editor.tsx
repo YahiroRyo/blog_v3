@@ -1,7 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { css, SerializedStyles } from '@emotion/react';
+import { SerializedStyles } from '@emotion/react';
 import axios from 'axios';
 import { ClipboardEvent, ComponentProps, DragEvent, useRef } from 'react';
+import ReactCodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
+import { languages } from '@codemirror/language-data';
+import { sublime } from '@uiw/codemirror-theme-sublime';
 
 type EditorProps = {
   setValue: (value: string) => void;
@@ -20,20 +24,46 @@ const generateRandomString = (num: number) => {
 };
 
 const Editor = ({ setValue, value, style }: EditorProps) => {
-  const textArea = useRef<HTMLTextAreaElement>(null);
+  const textArea = useRef<ReactCodeMirrorRef>(null);
+
+  const editorCurrentNumber = () => {
+    const lines = textArea
+      .current!.editor!.querySelector('.cm-editor')
+      ?.querySelector('.cm-scroller')
+      ?.querySelector('.cm-content')!;
+    const currentNode = lines?.querySelector('.cm-activeLine')!;
+
+    for (let i = 0; i < lines.children.length; i++) {
+      if (lines.children[i] === currentNode) {
+        return i + 1;
+      }
+    }
+
+    return 1;
+  };
 
   const setUploadingTextToValue = (): {
     contents: string;
     uploadImageText: string;
   } => {
-    const cursorPos = textArea.current!.selectionStart;
+    const currnetNumber = editorCurrentNumber();
+
+    let cursorPos = 0;
+
+    const lines = (value as string).split('\n');
+    lines.forEach((line, index) => {
+      if (index >= currnetNumber) {
+        return;
+      }
+
+      cursorPos += line.length + 1;
+    });
 
     const uploadImageText = `![UploadImage...](${generateRandomString(10)}.jpg)`;
-    const before = (value as string).substring(1, cursorPos);
-    const after = (value as string).substring(cursorPos, (value as string).length - 1);
+    const before = (value as string).substring(0, cursorPos);
+    const after = (value as string).substring(cursorPos, (value as string).length);
 
-    const beforeLines = before.split('\n');
-    const contents = before + `${beforeLines[beforeLines.length - 1].length ? '\n' : ''}${uploadImageText}` + after;
+    const contents = before + uploadImageText + '\n' + after + '\n';
     setValue(contents);
 
     return {
@@ -42,7 +72,7 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
     };
   };
 
-  const onPaste = async (e: ClipboardEvent<HTMLTextAreaElement>) => {
+  const onPaste = async (e: ClipboardEvent<HTMLDivElement>) => {
     const item = e.clipboardData.items[0];
 
     if (item.type.indexOf('image') === 0) {
@@ -75,7 +105,7 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
     }
   };
 
-  const onDrop = async (e: DragEvent<HTMLTextAreaElement>) => {
+  const onDrop = async (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
 
     const item = e.dataTransfer.files[0];
@@ -101,16 +131,14 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
   };
 
   return (
-    <textarea
-      css={css`
-        display: block;
-        min-height: 15rem;
-        padding: 1rem;
-        line-height: 1.5;
-        ${style}
-      `}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
+    <ReactCodeMirror
+      css={style}
+      value={value as string}
+      extensions={[markdown({ base: markdownLanguage, codeLanguages: languages })]}
+      theme={sublime}
+      onChange={(value) => {
+        setValue(value);
+      }}
       onPaste={onPaste}
       onDrop={onDrop}
       ref={textArea}

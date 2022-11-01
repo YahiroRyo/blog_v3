@@ -22,6 +22,11 @@ type EditBlogFormProps = {
   editBlog: (e: FormEvent<HTMLFormElement>) => void;
 };
 
+const values = [
+  { label: '公開', value: true },
+  { label: '非公開', value: false },
+];
+
 const EditBlogForm = ({
   title,
   body,
@@ -34,11 +39,6 @@ const EditBlogForm = ({
   setIsActive,
   editBlog,
 }: EditBlogFormProps) => {
-  const values = [
-    { label: '公開', value: true },
-    { label: '非公開', value: false },
-  ];
-
   return (
     <form action='POST' onSubmit={editBlog}>
       <RadioButtonGroup
