@@ -7,7 +7,6 @@ use Packages\Infrastructure\Eloquent\User\User;
 use Tests\DBSetUpTestCase;
 
 class CreateUserTest extends DBSetUpTestCase {
-    protected bool $useSeed = false;
     protected bool $login   = false;
 
     public function test_ユーザーの作成を行う(): void {

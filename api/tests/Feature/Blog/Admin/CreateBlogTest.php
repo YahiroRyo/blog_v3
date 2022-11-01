@@ -8,8 +8,6 @@ use Packages\Infrastructure\Eloquent\Blog\Blog;
 use Tests\DBSetUpTestCase;
 
 class CreateUserTest extends DBSetUpTestCase {
-    protected bool $useSeed = false;
-
     public function test_ブログの作成を行う(): void {
         Storage::fake('files');
         $mainImage = UploadedFile::fake()->image('dummy.jpg', 800, 800);
@@ -25,7 +23,7 @@ class CreateUserTest extends DBSetUpTestCase {
 
         unset($request['mainImage']);
 
-        $blog = Blog::first();
+        $blog = Blog::orderBy('blogId', 'desc')->first();
 
         $this->assertEquals($request, [
             'title' => $blog->content->title,
