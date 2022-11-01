@@ -5,7 +5,6 @@ namespace Tests\Feature\User\Admin;
 use Tests\DBSetUpTestCase;
 
 class LogoutUserTest extends DBSetUpTestCase {
-    protected bool $useSeed = false;
     protected bool $login   = true;
 
     public function test_ログアウトを行う(): void {

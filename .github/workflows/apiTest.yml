@@ -37,11 +37,7 @@ jobs:
     - name: composer install
       if: steps.cache.outputs.cache-hit != 'true'
       run: composer install -n --prefer-dist
-    - name: migrate
-      run: php artisan migrate
-      env:
-        DB_HOST: 127.0.0.1
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_HOST: 127.0.0.1
-      run: vendor/bin/phpunit
+      run: ./bin/test.sh
