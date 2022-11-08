@@ -46,6 +46,7 @@ const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps)
         style={css`
           width: ${size.width / 2}px;
           height: 100%;
+          overflow-x: auto;
         `}
       />
     </div>
