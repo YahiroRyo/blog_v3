@@ -3,15 +3,14 @@ import { css } from '@emotion/react';
 import useWindowSize from '../../atoms/Layout/windowSize';
 
 type ImageModalProps = {
-  width: number;
-  height: number;
   alt: string;
   src: string;
   onClose?: () => void;
 };
 
-const ImageModal = ({ width, height, alt, src, onClose }: ImageModalProps) => {
+const ImageModal = ({ alt, src, onClose }: ImageModalProps) => {
   const size = useWindowSize();
+  const width = size.width < 500 ? size.width - 10 : size.width - size.width / 3;
 
   return (
     <div
@@ -21,7 +20,7 @@ const ImageModal = ({ width, height, alt, src, onClose }: ImageModalProps) => {
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.25);
+        background-color: rgba(0, 0, 0, 0.75);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -31,7 +30,7 @@ const ImageModal = ({ width, height, alt, src, onClose }: ImageModalProps) => {
     >
       <img
         css={css`
-          width: ${size.width - 100};
+          width: ${width}px;
         `}
         src={src}
         alt={alt}
