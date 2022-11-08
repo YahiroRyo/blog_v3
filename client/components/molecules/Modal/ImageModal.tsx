@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import useWindowSize from '../../atoms/Layout/windowSize';
 
 type ImageModalProps = {
   width: number;
@@ -10,6 +11,8 @@ type ImageModalProps = {
 };
 
 const ImageModal = ({ width, height, alt, src, onClose }: ImageModalProps) => {
+  const size = useWindowSize();
+
   return (
     <div
       css={css`
@@ -22,10 +25,17 @@ const ImageModal = ({ width, height, alt, src, onClose }: ImageModalProps) => {
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 100;
       `}
       onClick={onClose}
     >
-      <img width={width} height={height} src={src} alt={alt} />
+      <img
+        css={css`
+          width: ${size.width - 100};
+        `}
+        src={src}
+        alt={alt}
+      />
     </div>
   );
 };
