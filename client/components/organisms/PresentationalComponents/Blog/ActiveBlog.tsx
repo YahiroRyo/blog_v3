@@ -42,6 +42,7 @@ const ActiveBlog = ({
           display: flex;
           align-items: center;
           justify-content: center;
+          margin: 16px 0;
         `}
       >
         <Image src={mainImage} width={800} height={450} alt={`${title}のメインイメージ`} />
