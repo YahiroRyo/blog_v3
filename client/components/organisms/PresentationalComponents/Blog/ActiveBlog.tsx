@@ -36,7 +36,7 @@ const ActiveBlog = ({
         <meta name='theme-color' content='#f8f8f8' />
       </Head>
       <Title>{title}</Title>
-      {image ? <ImageModal onClose={() => setImage('')} width={800} height={450} alt={''} src={image} /> : <></>}
+      {image ? <ImageModal onClose={() => setImage('')} alt={''} src={image} /> : <></>}
       <div
         css={css`
           display: flex;
