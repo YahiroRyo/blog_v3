@@ -36,7 +36,8 @@ const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps)
         style={css`
           background-color: #fff;
           padding: 2rem;
-          width: ${size.width / 2}px;
+          box-sizing: border-box;
+          width: 100%;
         `}
         html={html}
       />
@@ -44,7 +45,7 @@ const PreviewMarkdown = ({ markdown, setMarkdown, style }: PreviewMarkdownProps)
         value={markdown}
         setValue={setMarkdown}
         style={css`
-          width: ${size.width / 2}px;
+          width: 100%;
           height: 100%;
           overflow-x: auto;
         `}
