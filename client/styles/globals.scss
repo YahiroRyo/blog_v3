@@ -113,6 +113,13 @@ html {
   max-width: 100%;
   box-sizing: content-box;
   background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(51, 51, 51, 0);
+}
+
+.markdown-body img:hover {
+  cursor: pointer;
+  border: 1px solid rgba(51, 51, 51, 0.25);
 }
 
 .markdown-body code,
