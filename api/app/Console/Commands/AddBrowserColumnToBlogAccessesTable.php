@@ -30,7 +30,6 @@ class AddBrowserColumnToBlogAccessesTable extends Command {
             'FilterExpression'          => '#id BETWEEN :fromId AND :toId',
             'ExpressionAttributeNames'  => [
                 '#id'       => 'id',
-                '#blogId'   => 'blogId'
             ],
             'ExpressionAttributeValues' => [
                 ':fromId'               => ['N' => '1'],
