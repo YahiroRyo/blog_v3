@@ -8,6 +8,10 @@ final class AccessedBrowserType {
     /** @var array<string, int> */
     protected array $value = [];
 
+    public function __construct(array $value) {
+        $this->value = $value;
+    }
+
     public function addBrowser(Browser $browser): AccessedBrowserType {
         $preValue                  = $this->value;
         $preValue[$browser->value] = 1;
@@ -19,14 +23,12 @@ final class AccessedBrowserType {
         $preValue = $this->value;
         $preValue[$browser->value]++;
 
-        $this->accessNum++;
-
         return AccessedBrowserType::of($preValue);
     }
 
     public function increment(Browser $browser): AccessedBrowserType {
         foreach ($this->value as $targetBrowser => $num) {
-            if ($browser->eq($targetBrowser)) {
+            if (!$browser->eq($targetBrowser)) {
                 continue;
             }
 
@@ -40,8 +42,10 @@ final class AccessedBrowserType {
         $result = [];
 
         foreach ($this->value as $browser => $accessNum) {
-            $result['name']     = $browser;
-            $result['values']   = $accessNum;
+            $result[] = [
+                'name'  => $browser,
+                'value' => $accessNum,
+            ];
         }
 
         return $result;
