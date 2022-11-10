@@ -25,7 +25,7 @@ export const middleware = async (req: NextRequest) => {
 
   req.cookies.set(`blogs/accessed/${req.nextUrl.searchParams.get('blogId')}`, true, {
     maxAge: 1800,
-    httpOnly: true
+    httpOnly: true,
   });
 
   return NextResponse.next(req);

@@ -1,8 +1,13 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import ReactEcharts from 'echarts-for-react';
+import { MouseEvent } from 'react';
+import ReloadButton from '../../../atoms/Button/ReloadButton';
 
 type AccessesNumBlogGraphProps = {
   dates: string[];
   values: number[];
+  onReload: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
 type TooltipFormatter = {
@@ -21,7 +26,7 @@ type TooltipFormatter = {
   percent: number;
 };
 
-const AccessesNumBlogGraph = ({ dates, values }: AccessesNumBlogGraphProps) => {
+const AccessesNumBlogGraph = ({ dates, values, onReload }: AccessesNumBlogGraphProps) => {
   const option = {
     title: {
       text: '30日前から今日までの閲覧数履歴',
@@ -61,7 +66,17 @@ const AccessesNumBlogGraph = ({ dates, values }: AccessesNumBlogGraphProps) => {
     ],
   };
 
-  return <ReactEcharts option={option} />;
+  return (
+    <>
+      <ReloadButton onClick={onReload} />
+      <ReactEcharts
+        css={css`
+          margin-top: 0.5rem;
+        `}
+        option={option}
+      />
+    </>
+  );
 };
 
 export default AccessesNumBlogGraph;
