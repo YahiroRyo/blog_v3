@@ -51,6 +51,7 @@ final class NoSQLDetailActiveBlogAccessRepository implements DetailActiveBlogAcc
                 'id'                => ['N' => $response['Attributes']['currentNumber']['N']],
                 'blogId'            => ['S' => $detailActiveBlogAccess->blogId()->value()],
                 'headers'           => ['S' => $detailActiveBlogAccess->headers()->value()],
+                'browser'           => ['S' => $detailActiveBlogAccess->userAgent()->browser()->value],
                 'userAgent'         => ['S' => $detailActiveBlogAccess->userAgent()->value()],
                 'referer'           => ['S' => $detailActiveBlogAccess->referer()->value()],
                 'from'              => ['S' => $detailActiveBlogAccess->from()->value()],
