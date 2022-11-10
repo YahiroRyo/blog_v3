@@ -3,6 +3,7 @@ import { css, SerializedStyles } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { color } from '../../../../styles/color';
+import useWindowSize from '../../../atoms/Layout/windowSize';
 import Title from '../../../atoms/Text/Title';
 
 type ActiveBlogCardProps = {
@@ -13,6 +14,8 @@ type ActiveBlogCardProps = {
 };
 
 const ActiveBlogCard = ({ blogId, title, thumbnail, style }: ActiveBlogCardProps) => {
+  const size = useWindowSize();
+
   return (
     <article
       css={css`
@@ -32,13 +35,25 @@ const ActiveBlogCard = ({ blogId, title, thumbnail, style }: ActiveBlogCardProps
             background-color: ${color.white};
             border-radius: 1rem;
             padding: 2rem;
-            display: flex;
+            display: ${size.width < 500 ? 'block' : 'flex'};
             column-gap: 2rem;
             text-decoration: none;
           `}
         >
-          <Image src={thumbnail} width={400} height={225} alt={`${title}のサムネイル`} />
-          <Title>{title}</Title>
+          <Image src={thumbnail} width={400} height={225} objectFit={'contain'} alt={`${title}のサムネイル`} />
+          <Title
+            style={
+              size.width < 500
+                ? css`
+                    margin-top: 0.5rem;
+                    font-size: 1rem;
+                    line-height: 1.25;
+                  `
+                : css``
+            }
+          >
+            {title}
+          </Title>
         </a>
       </Link>
     </article>
