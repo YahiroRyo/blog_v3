@@ -9,4 +9,8 @@ final class BlogId extends Ulid {
     use NoSQLColumnString;
 
     protected string $name = 'ブログID';
+
+    public function cacheKey(): string {
+        return "blogs/{$this->value}";
+    }
 }

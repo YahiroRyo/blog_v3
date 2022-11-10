@@ -9,6 +9,7 @@ use App\Http\Requests\Blog\Admin\DeleteBlogRequest;
 use App\Http\Requests\Blog\Admin\DetailBlogRequest;
 use App\Http\Requests\Blog\Admin\EditBlogMainImageRequest;
 use App\Http\Requests\Blog\Admin\EditBlogRequest;
+use App\Http\Requests\Blog\Admin\ForgetAccessesNumBlogRequest;
 use App\Http\Requests\Blog\Admin\UploadImageRequest;
 use Packages\Service\Blog\Command\AccessesNumDetailBlogService;
 use Packages\Service\Blog\Command\BlogService;
@@ -75,5 +76,9 @@ class AdminBlogController extends Controller {
 
     public function accessesNumBlog(AccessesNumDetailBlogRequest $request): array {
         return $this->accessesNumDetailBlogs->get($request->ofDomain());
+    }
+
+    public function forgetAccessesNumBlogCache(ForgetAccessesNumBlogRequest $request): void {
+        $this->accessesNumDetailBlogs->forgetCache($request->ofDomain());
     }
 }

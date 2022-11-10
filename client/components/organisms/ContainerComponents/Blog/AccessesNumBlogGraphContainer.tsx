@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import useSWR from 'swr';
 import AccessesNumBlogGraph from '../../PresentationalComponents/Blog/AccessesNumBlogGraph';
 
@@ -40,15 +41,27 @@ const AccessesNumBlogGraphContainer = () => {
     return result;
   };
 
-  const { data, error } = useSWR(
+  const { data, error, mutate } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/${router.query.blogId}/accessesNum`,
     fecher,
   );
 
+  const onReload = async () => {
+    if (!sessionStorage.getItem('token')) return;
+
+    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/blogs/${router.query.blogId}/accessesNum/cache`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    });
+
+    mutate();
+  };
+
   if (error) return <>error</>;
   if (!data) return <>loading...</>;
 
-  return <AccessesNumBlogGraph {...data} />;
+  return <AccessesNumBlogGraph onReload={onReload} {...data} />;
 };
 
 export default AccessesNumBlogGraphContainer;

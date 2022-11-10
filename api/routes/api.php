@@ -28,9 +28,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('/', [AdminBlogController::class, 'deleteBlog']);
             Route::post('/image', [AdminBlogController::class, 'uploadImage']);
             Route::put('/mainImage', [AdminBlogController::class, 'editBlogMainImage']);
+
             Route::prefix('/{blogId}')->group(function () {
                 Route::get('/', [AdminBlogController::class, 'blog']);
-                Route::get('/accessesNum', [AdminBlogController::class, 'accessesNumBlog']);
+
+                Route::prefix('/accessesNum')->group(function () {
+                    Route::get('/', [AdminBlogController::class, 'accessesNumBlog']);
+                    Route::delete('/cache', [AdminBlogController::class, 'forgetAccessesNumBlogCache']);
+                });
             });
         });
     });
@@ -38,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('/blogs')->group(function () {
     Route::get('/', [ClientBlogController::class, 'activeBlogList']);
+
     Route::prefix('/{blogId}')->group(function () {
         Route::get('/', [ClientBlogController::class, 'detailActiveBlog']);
         Route::post('/access', [ClientBlogController::class, 'detialActiveBlogAccess']);
