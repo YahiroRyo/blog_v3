@@ -43,7 +43,11 @@ const ActiveBlogCard = ({ blogId, title, thumbnail, createdAt, style }: ActiveBl
           `}
         >
           <Image src={thumbnail} width={400} height={225} objectFit={'contain'} alt={`${title}のサムネイル`} />
-          <div>
+          <div
+            css={css`
+              margin-top: ${size.width < 500 ? '1rem' : '0'};
+            `}
+          >
             <Text
               style={css`
                 letter-spacing: 1px;
