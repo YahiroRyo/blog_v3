@@ -15,12 +15,12 @@ final class AccessesNumDetailBlogService {
     }
 
     public function forgetCache(BlogId $blogId): void {
-        Cache::forget($blogId->cacheKey());
+        Cache::forget($blogId->accessesNumCacheKey());
     }
 
     public function get(AccessesNumDetailBlog $accessesNumDetailBlog): array {
         return Cache::remember(
-            $accessesNumDetailBlog->blogId()->cacheKey(),
+            $accessesNumDetailBlog->blogId()->accessesNumCacheKey(),
             60 * 60 * 24,
             function () use ($accessesNumDetailBlog) {
                 return $this->accessesNumDetailBlogs->get($accessesNumDetailBlog)->ofJson();

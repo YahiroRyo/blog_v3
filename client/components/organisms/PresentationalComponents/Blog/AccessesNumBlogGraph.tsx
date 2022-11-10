@@ -67,15 +67,19 @@ const AccessesNumBlogGraph = ({ dates, values, onReload }: AccessesNumBlogGraphP
   };
 
   return (
-    <>
+    <div
+      css={css`
+        margin: 2rem 0;
+      `}
+    >
       <ReloadButton onClick={onReload} />
       <ReactEcharts
         css={css`
-          margin-top: 0.5rem;
+          margin-top: 1rem;
         `}
         option={option}
       />
-    </>
+    </div>
   );
 };
 

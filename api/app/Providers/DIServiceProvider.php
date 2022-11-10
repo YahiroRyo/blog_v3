@@ -6,11 +6,14 @@ use Illuminate\Support\ServiceProvider;
 use Packages\Infrastructure\Aws\Image\Upload\LocalUploadImage;
 use Packages\Infrastructure\Aws\Image\Upload\S3UploadImage;
 use Packages\Infrastructure\Aws\Image\Upload\UploadImage;
+use Packages\Infrastructure\Repositories\Blog\AccessedBrowserTypeRepository;
 use Packages\Infrastructure\Repositories\Blog\AccessesNumDetailBlogRepository;
 use Packages\Infrastructure\Repositories\Blog\DetailActiveBlogAccessRepository;
+use Packages\Infrastructure\Repositories\Blog\LocalAccessedBrowserTypeRepository;
 use Packages\Infrastructure\Repositories\Blog\LocalAccessesNumDetailBlogRepository;
 use Packages\Infrastructure\Repositories\Blog\NoSQLDetailActiveBlogAccessRepository;
 use Packages\Infrastructure\Repositories\Blog\LocalDetailActiveBlogAccessRepository;
+use Packages\Infrastructure\Repositories\Blog\NoSQLAccessedBrowserTypeRepository;
 use Packages\Infrastructure\Repositories\Blog\NoSQLAccessesNumDetailBlogRepository;
 
 class DIServiceProvider extends ServiceProvider {
@@ -18,11 +21,13 @@ class DIServiceProvider extends ServiceProvider {
         UploadImage::class                          => S3UploadImage::class,
         DetailActiveBlogAccessRepository::class     => NoSQLDetailActiveBlogAccessRepository::class,
         AccessesNumDetailBlogRepository::class      => NoSQLAccessesNumDetailBlogRepository::class,
+        AccessedBrowserTypeRepository::class        => NoSQLAccessedBrowserTypeRepository::class,
     ];
     private array $localBinds = [
         UploadImage::class                          => LocalUploadImage::class,
         DetailActiveBlogAccessRepository::class     => LocalDetailActiveBlogAccessRepository::class,
         AccessesNumDetailBlogRepository::class      => LocalAccessesNumDetailBlogRepository::class,
+        AccessedBrowserTypeRepository::class        => LocalAccessedBrowserTypeRepository::class,
     ];
 
     public function register(): void {
