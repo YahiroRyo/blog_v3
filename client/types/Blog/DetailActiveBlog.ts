@@ -3,4 +3,5 @@ export type DetailActiveBlog = {
   body: string;
   thumbnail: string;
   mainImage: string;
+  createdAt: string;
 };

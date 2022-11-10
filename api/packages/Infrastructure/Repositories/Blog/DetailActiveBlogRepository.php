@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Packages\Domain\Blog\Entities\DetailActiveBlog;
 use Packages\Domain\Blog\ValueObjects\BlogId;
 use Packages\Domain\Blog\ValueObjects\Body;
+use Packages\Domain\Blog\ValueObjects\CreatedAt;
 use Packages\Domain\Blog\ValueObjects\ThumbnailUrl;
 use Packages\Domain\Blog\ValueObjects\Title;
 
@@ -17,7 +18,8 @@ final class DetailActiveBlogRepository {
                 blogs.blogId                    as blogId,
                 blogContents.title              as title,
                 blogContents.body               as body,
-                blogContents.thumbnail          as thumbnail
+                blogContents.thumbnail          as thumbnail,
+                blogs.createdAt                 as createdAt
             FROM blogs
             INNER JOIN activeBlogs
                 USING(blogId)
@@ -34,6 +36,7 @@ final class DetailActiveBlogRepository {
         return new DetailActiveBlog(
             Title::of($blog->title),
             Body::of($blog->body),
+            CreatedAt::of($blog->createdAt),
             ThumbnailUrl::of($blog->thumbnail),
         );
     }

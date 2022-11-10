@@ -5,4 +5,5 @@ export type DetailBlog = {
   thumbnail: string;
   mainImage: string;
   isActive: boolean;
+  createdAt: string;
 };

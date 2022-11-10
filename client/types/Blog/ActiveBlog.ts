@@ -4,4 +4,5 @@ export type ActiveBlog = {
   body: string;
   thumbnail: string;
   mainImage: string;
+  createdAt: string;
 };

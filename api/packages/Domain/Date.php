@@ -20,6 +20,10 @@ abstract class Date {
         return $this->value;
     }
 
+    public function date(): string {
+        return $this->value->isoFormat('YYYY年MM月DD日（ddd）');
+    }
+
     public static function of(string $value): Date {
         return new static($value);
     }
