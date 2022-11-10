@@ -10,11 +10,12 @@ type BlogCardProps = {
   blogId: string;
   title: string;
   thumbnail: string;
+  createdAt: string;
   isActive: boolean;
   style?: SerializedStyles;
 };
 
-const BlogCard = ({ blogId, title, thumbnail, isActive, style }: BlogCardProps) => {
+const BlogCard = ({ blogId, title, thumbnail, createdAt, isActive, style }: BlogCardProps) => {
   return (
     <article
       css={css`
@@ -39,6 +40,13 @@ const BlogCard = ({ blogId, title, thumbnail, isActive, style }: BlogCardProps) 
         >
           <Image src={thumbnail} width={400} height={225} alt={`${title}のサムネイル`} />
           <div>
+            <Text
+              style={css`
+                letter-spacing: 1px;
+              `}
+            >
+              ブログ作成日: {createdAt}
+            </Text>
             <Text>表示ステータス：{isActive ? '表示' : '非表示'}</Text>
             <Title>{title}</Title>
           </div>

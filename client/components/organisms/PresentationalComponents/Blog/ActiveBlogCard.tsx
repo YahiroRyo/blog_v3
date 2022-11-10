@@ -4,16 +4,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { color } from '../../../../styles/color';
 import useWindowSize from '../../../atoms/Layout/windowSize';
+import Text from '../../../atoms/Text/Text';
 import Title from '../../../atoms/Text/Title';
 
 type ActiveBlogCardProps = {
   blogId: string;
   title: string;
   thumbnail: string;
+  createdAt: string;
   style?: SerializedStyles;
 };
 
-const ActiveBlogCard = ({ blogId, title, thumbnail, style }: ActiveBlogCardProps) => {
+const ActiveBlogCard = ({ blogId, title, thumbnail, createdAt, style }: ActiveBlogCardProps) => {
   const size = useWindowSize();
 
   return (
@@ -41,19 +43,28 @@ const ActiveBlogCard = ({ blogId, title, thumbnail, style }: ActiveBlogCardProps
           `}
         >
           <Image src={thumbnail} width={400} height={225} objectFit={'contain'} alt={`${title}のサムネイル`} />
-          <Title
-            style={
-              size.width < 500
-                ? css`
-                    margin-top: 0.5rem;
-                    font-size: 1rem;
-                    line-height: 1.25;
-                  `
-                : css``
-            }
-          >
-            {title}
-          </Title>
+          <div>
+            <Text
+              style={css`
+                letter-spacing: 1px;
+              `}
+            >
+              ブログ作成日: {createdAt}
+            </Text>
+            <Title
+              style={
+                size.width < 500
+                  ? css`
+                      margin-top: 0.5rem;
+                      font-size: 1rem;
+                      line-height: 1.25;
+                    `
+                  : css``
+              }
+            >
+              {title}
+            </Title>
+          </div>
         </a>
       </Link>
     </article>

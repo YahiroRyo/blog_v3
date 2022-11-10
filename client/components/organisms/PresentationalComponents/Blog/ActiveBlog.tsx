@@ -6,6 +6,7 @@ import Title from '../../../atoms/Text/Title';
 import 'highlight.js/styles/github.css';
 import ImageModal from '../../../molecules/Modal/ImageModal';
 import { css } from '@emotion/react';
+import Text from '../../../atoms/Text/Text';
 
 const ActiveBlog = ({
   title,
@@ -13,6 +14,7 @@ const ActiveBlog = ({
   thumbnail,
   mainImage,
   description,
+  createdAt,
   image,
   setImage,
 }: DetailActiveBlogMeta & { image?: string; setImage: (value: string) => void }) => {
@@ -36,6 +38,14 @@ const ActiveBlog = ({
         <meta name='theme-color' content='#f8f8f8' />
       </Head>
       <Title>{title}</Title>
+      <Text
+        style={css`
+          letter-spacing: 1px;
+          margin-bottom: 2rem;
+        `}
+      >
+        ブログ作成日: {createdAt}
+      </Text>
       {image ? <ImageModal onClose={() => setImage('')} alt={''} src={image} /> : <></>}
       <div
         css={css`

@@ -8,7 +8,7 @@ import Title from '../../../atoms/Text/Title';
 import 'highlight.js/styles/github.css';
 import { css } from '@emotion/react';
 
-const Blog = ({ title, body, mainImage, blogId, isActive }: DetailBlog) => {
+const Blog = ({ title, body, mainImage, blogId, createdAt, isActive }: DetailBlog) => {
   useSyntaxHighlight();
 
   return (
@@ -30,6 +30,14 @@ const Blog = ({ title, body, mainImage, blogId, isActive }: DetailBlog) => {
       >
         {title}
       </Title>
+      <Text
+        style={css`
+          letter-spacing: 1px;
+          margin-bottom: 2rem;
+        `}
+      >
+        ブログ作成日: {createdAt}
+      </Text>
       <div
         css={css`
           display: flex;

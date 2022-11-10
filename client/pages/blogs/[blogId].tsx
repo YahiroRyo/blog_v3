@@ -10,7 +10,7 @@ type BlogProps = DetailActiveBlogMeta & {
   error: string;
 };
 
-const Blog = ({ title, body, thumbnail, mainImage, description, error }: BlogProps) => {
+const Blog = ({ title, body, thumbnail, mainImage, description, createdAt, error }: BlogProps) => {
   return (
     <SiteContainer useResize>
       {error === '' ? (
@@ -20,6 +20,7 @@ const Blog = ({ title, body, thumbnail, mainImage, description, error }: BlogPro
           mainImage={mainImage}
           thumbnail={thumbnail}
           description={description}
+          createdAt={createdAt}
         />
       ) : (
         <>{error}</>
@@ -37,6 +38,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     thumbnail: '',
     mainImage: '',
     description: '',
+    createdAt: '',
     error: '',
   };
 
@@ -48,6 +50,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     result.body = marked(response.data.body);
     result.thumbnail = response.data.thumbnail;
     result.mainImage = response.data.mainImage;
+    result.createdAt = response.data.createdAt;
     result.description = response.data.body.replaceAll('#', '').replaceAll('\n', ' ');
   } catch (e) {
     console.error(e);
