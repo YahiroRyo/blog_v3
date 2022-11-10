@@ -40,7 +40,8 @@ final class AccessedBrowserType {
         $result = [];
 
         foreach ($this->value as $browser => $accessNum) {
-            $result[$browser] = $accessNum;
+            $result['name']     = $browser;
+            $result['values']   = $accessNum;
         }
 
         return $result;
