@@ -10,7 +10,11 @@ final class BlogId extends Ulid {
 
     protected string $name = 'ブログID';
 
-    public function cacheKey(): string {
-        return "blogs/{$this->value}";
+    public function accessesNumCacheKey(): string {
+        return "blogs/accessesNum/{$this->value}";
+    }
+
+    public function accessedBrowserTypeCacheKey(): string {
+        return "blogs/accessedBrowserType/{$this->value}";
     }
 }

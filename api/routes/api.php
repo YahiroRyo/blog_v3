@@ -36,6 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
                     Route::get('/', [AdminBlogController::class, 'accessesNumBlog']);
                     Route::delete('/cache', [AdminBlogController::class, 'forgetAccessesNumBlogCache']);
                 });
+
+                Route::prefix('/accessedBrowserType')->group(function () {
+                    Route::get('/', [AdminBlogController::class, 'accessedBrowserType']);
+                    Route::delete('/cache', [AdminBlogController::class, 'forgetAccessedBrowserType']);
+                });
             });
         });
     });

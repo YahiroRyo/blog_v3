@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\Admin\AccessedBrowserTypeRequest;
 use App\Http\Requests\Blog\Admin\AccessesNumDetailBlogRequest;
 use App\Http\Requests\Blog\Admin\CreateBlogRequest;
 use App\Http\Requests\Blog\Admin\DeleteBlogRequest;
@@ -10,7 +11,9 @@ use App\Http\Requests\Blog\Admin\DetailBlogRequest;
 use App\Http\Requests\Blog\Admin\EditBlogMainImageRequest;
 use App\Http\Requests\Blog\Admin\EditBlogRequest;
 use App\Http\Requests\Blog\Admin\ForgetAccessesNumBlogRequest;
+use App\Http\Requests\Blog\Admin\ForgetAccessedBrowserTypeRequest;
 use App\Http\Requests\Blog\Admin\UploadImageRequest;
+use Packages\Service\Blog\Command\AccessedBrowserTypeService;
 use Packages\Service\Blog\Command\AccessesNumDetailBlogService;
 use Packages\Service\Blog\Command\BlogService;
 use Packages\Service\Blog\Command\DetailBlogService;
@@ -26,6 +29,7 @@ class AdminBlogController extends Controller {
     private BlogService $blogService;
     private DetailBlogService $detailBlogService;
     private AccessesNumDetailBlogService $accessesNumDetailBlogs;
+    private AccessedBrowserTypeService $accessedBrowserTypeService;
     private UploadImageService $uploadImageService;
 
     public function __construct(
@@ -35,15 +39,17 @@ class AdminBlogController extends Controller {
         BlogService $blogService,
         DetailBlogService $detailBlogService,
         AccessesNumDetailBlogService $accessesNumDetailBlogs,
+        AccessedBrowserTypeService $accessedBrowserTypeService,
         UploadImageService $uploadImageService
     ) {
-        $this->initBlogService             = $initBlogService;
-        $this->inProgressBlogService       = $inProgressBlogService;
-        $this->deleteBlogService           = $deleteBlogService;
-        $this->blogService                 = $blogService;
-        $this->detailBlogService           = $detailBlogService;
-        $this->accessesNumDetailBlogs      = $accessesNumDetailBlogs;
-        $this->uploadImageService          = $uploadImageService;
+        $this->initBlogService                      = $initBlogService;
+        $this->inProgressBlogService                = $inProgressBlogService;
+        $this->deleteBlogService                    = $deleteBlogService;
+        $this->blogService                          = $blogService;
+        $this->detailBlogService                    = $detailBlogService;
+        $this->accessesNumDetailBlogs               = $accessesNumDetailBlogs;
+        $this->accessedBrowserTypeService           = $accessedBrowserTypeService;
+        $this->uploadImageService                   = $uploadImageService;
     }
 
     public function createBlog(CreateBlogRequest $request): void {
@@ -74,8 +80,16 @@ class AdminBlogController extends Controller {
         return $this->detailBlogService->blog($request->ofDomain());
     }
 
+    public function accessedBrowserType(AccessedBrowserTypeRequest $request): array {
+        return $this->accessedBrowserTypeService->get($request->ofDomain());
+    }
+
     public function accessesNumBlog(AccessesNumDetailBlogRequest $request): array {
         return $this->accessesNumDetailBlogs->get($request->ofDomain());
+    }
+
+    public function forgetAccessedBrowserType(ForgetAccessedBrowserTypeRequest $request): void {
+        $this->accessedBrowserTypeService->forgetCache($request->ofDomain());
     }
 
     public function forgetAccessesNumBlogCache(ForgetAccessesNumBlogRequest $request): void {

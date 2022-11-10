@@ -11,4 +11,8 @@ enum Browser: string {
     case EDGE              = 'Edge';
     case INTERNET_EXPLORER = 'Internet Explorer';
     case UNKNOWN           = 'Unknown';
+
+    public function eq(string $browser): bool {
+        return $this->value === $browser;
+    }
 }
