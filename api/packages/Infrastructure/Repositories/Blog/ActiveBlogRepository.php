@@ -7,6 +7,7 @@ use Packages\Domain\Blog\Entities\ActiveBlog;
 use Packages\Domain\Blog\Entities\ActiveBlogList;
 use Packages\Domain\Blog\ValueObjects\BlogId;
 use Packages\Domain\Blog\ValueObjects\Body;
+use Packages\Domain\Blog\ValueObjects\CreatedAt;
 use Packages\Domain\Blog\ValueObjects\ThumbnailUrl;
 use Packages\Domain\Blog\ValueObjects\Title;
 
@@ -19,7 +20,8 @@ final class ActiveBlogRepository {
                 blogs.blogId                    as blogId,
                 blogContents.title              as title,
                 blogContents.body               as body,
-                blogContents.thumbnail          as thumbnail
+                blogContents.thumbnail          as thumbnail,
+                blogs.createdAt                 as createdAt
             FROM blogs
             INNER JOIN activeBlogs
                 USING(blogId)
@@ -34,6 +36,7 @@ final class ActiveBlogRepository {
                 BlogId::of($activeBlog->blogId),
                 Title::of($activeBlog->title),
                 Body::of($activeBlog->body),
+                CreatedAt::of($activeBlog->createdAt),
                 ThumbnailUrl::of($activeBlog->thumbnail),
             ));
         }

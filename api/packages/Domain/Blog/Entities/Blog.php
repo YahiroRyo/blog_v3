@@ -4,6 +4,7 @@ namespace Packages\Domain\Blog\Entities;
 
 use Packages\Domain\Blog\ValueObjects\BlogId;
 use Packages\Domain\Blog\ValueObjects\Body;
+use Packages\Domain\Blog\ValueObjects\CreatedAt;
 use Packages\Domain\Blog\ValueObjects\IsActive;
 use Packages\Domain\Blog\ValueObjects\ThumbnailUrl;
 use Packages\Domain\Blog\ValueObjects\Title;
@@ -13,6 +14,7 @@ final class Blog {
     private Title $title;
     private Body $body;
     private ThumbnailUrl $thumbnailUrl;
+    private CreatedAt $createdAt;
     private IsActive $isActive;
 
     public function __construct(
@@ -20,12 +22,14 @@ final class Blog {
         Title $title,
         Body $body,
         ThumbnailUrl $thumbnailUrl,
+        CreatedAt $createdAt,
         IsActive $isActive,
     ) {
         $this->blogId        = $blogId;
         $this->title         = $title;
         $this->body          = $body;
         $this->thumbnailUrl  = $thumbnailUrl;
+        $this->createdAt     = $createdAt;
         $this->isActive      = $isActive;
     }
 
@@ -45,6 +49,10 @@ final class Blog {
         return $this->thumbnailUrl;
     }
 
+    public function createdAt(): CreatedAt {
+        return $this->createdAt;
+    }
+
     public function isActive(): IsActive {
         return $this->isActive;
     }
@@ -55,6 +63,7 @@ final class Blog {
             'title'         => $this->title->value(),
             'body'          => $this->body->value(),
             'thumbnail'     => $this->thumbnailUrl->value(),
+            'createdAt'     => $this->createdAt->date(),
             'isActive'      => $this->isActive->value(),
         ];
     }
