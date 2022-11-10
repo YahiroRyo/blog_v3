@@ -12,6 +12,8 @@ class AddBrowserColumnToBlogAccessesTable extends Command {
     protected $description = 'Command description';
 
     public function __construct(DynamoDbClient $dynamoDbClient) {
+        parent::__construct();
+
         $this->dynamoDbClient = $dynamoDbClient;
     }
 
