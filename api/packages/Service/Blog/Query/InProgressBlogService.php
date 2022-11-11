@@ -40,8 +40,8 @@ final class InProgressBlogService {
             Path::of($imageStoragePath->mainImageStoragePath()),
             FileName::of('')
         );
-        $tmpMainImageFilePath = $this->uploadImage->tmpSaveImageFile($initMainImage);
-        $this->uploadImage->upload($initMainImage, $tmpMainImageFilePath);
+        $tmpMainImageFilePath  = $this->uploadImage->tmpSaveImageFile($initMainImage);
+        $uploadMainImageStatus = $this->uploadImage->upload($initMainImage, $tmpMainImageFilePath);
 
         $initThumbnail = new InitUploadImage(
             $inProgressBlogMainImage->thumbnail()->value(),
@@ -55,5 +55,7 @@ final class InProgressBlogService {
             $inProgressBlogMainImage,
             ThumbnailUrl::of($uploadThumbnailImageStatus->waitUploadImage()->value())
         );
+
+        $uploadMainImageStatus->waitUploadImage();
     }
 }

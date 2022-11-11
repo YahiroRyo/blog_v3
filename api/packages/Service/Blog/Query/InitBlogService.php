@@ -31,20 +31,22 @@ final class InitBlogService {
             Path::of($imageStoragePath->mainImageStoragePath()),
             FileName::of('')
         );
-        $tmpMainImageFilePath = $this->uploadImage->tmpSaveImageFile($initMainImage);
-        $this->uploadImage->upload($initMainImage, $tmpMainImageFilePath);
+        $tmpMainImageFilePath  = $this->uploadImage->tmpSaveImageFile($initMainImage);
+        $uploadMainImageStatus = $this->uploadImage->upload($initMainImage, $tmpMainImageFilePath);
 
         $initThumbnail = new InitUploadImage(
             $initBlog->thumbnail()->value(),
             Path::of($imageStoragePath->thumbnailStoragePath()),
             $initMainImage->fileName()
         );
-        $tmpThumbanilFilePath    = $this->uploadImage->tmpSaveImageFile($initThumbnail);
-        $thumbnailImageStatus    = $this->uploadImage->upload($initThumbnail, $tmpThumbanilFilePath);
+        $tmpThumbanilFilePath          = $this->uploadImage->tmpSaveImageFile($initThumbnail);
+        $uploadThumbnailImageStatus    = $this->uploadImage->upload($initThumbnail, $tmpThumbanilFilePath);
 
         $this->initBlogRepository->createBlog(
             $initBlog,
-            ThumbnailUrl::of($thumbnailImageStatus->waitUploadImage()->value())
+            ThumbnailUrl::of($uploadThumbnailImageStatus->waitUploadImage()->value())
         );
+
+        $uploadMainImageStatus->waitUploadImage();
     }
 }
