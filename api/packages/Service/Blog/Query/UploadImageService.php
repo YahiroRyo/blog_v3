@@ -33,9 +33,10 @@ final class UploadImageService {
         $tmpThumbnailFile = $this->uploadImage->tmpSaveImageFile($thumbnail);
         $tmpImageFile     = $this->uploadImage->tmpSaveImageFile($image);
 
-        $this->uploadImage->upload($image, $tmpImageFile);
-        $imageUploadStatus = $this->uploadImage->upload($thumbnail, $tmpThumbnailFile);
+        $uploadMainImageStatus      = $this->uploadImage->upload($image, $tmpImageFile);
+        $uploadThumbnailImageStatus = $this->uploadImage->upload($thumbnail, $tmpThumbnailFile);
 
-        return $imageUploadStatus->waitUploadImage()->value();
+        $uploadMainImageStatus->waitUploadImage();
+        return $uploadThumbnailImageStatus->waitUploadImage()->value();
     }
 }
