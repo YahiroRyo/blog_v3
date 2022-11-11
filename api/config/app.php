@@ -190,6 +190,7 @@ return [
         App\Providers\DataBaseQueryServiceProvider::class,
         App\Providers\DIServiceProvider::class,
         App\Providers\DynamoServiceProvider::class,
+        App\Providers\S3ServiceProvider::class,
         /*
          * Application Service Providers...
          */

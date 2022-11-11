@@ -45,7 +45,7 @@ $app->register(App\Providers\DynamoServiceProvider::class);
 
 switch ($_SERVER['SERVER_NAME'] ?? 'localhost') {
     default:
-        $app->loadEnvironmentFrom('.env.local');
+        // $app->loadEnvironmentFrom('.env.local');
         break;
 }
 
