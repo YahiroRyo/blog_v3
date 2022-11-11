@@ -31,21 +31,22 @@ class BlogContentFactory extends Factory {
             Path::of($imageStoragePath->thumbnailStoragePath()),
             FileName::of('')
         );
-        $tmpThumbnailPath = $uploadImage->tmpSaveImageFile($initUploadThumbnail);
-        $imageUrl         = $uploadImage->upload($initUploadThumbnail, $tmpThumbnailPath);
+        $tmpThumbnailPath    = $uploadImage->tmpSaveImageFile($initUploadThumbnail);
+        $imageStatus         = $uploadImage->upload($initUploadThumbnail, $tmpThumbnailPath);
 
         $initUploadMainImage = new InitUploadImage(
             $mainImage->value(),
             Path::of($imageStoragePath->mainImageStoragePath()),
             $initUploadThumbnail->fileName()
         );
-        $tmpMainImagePath = $uploadImage->tmpSaveImageFile($initUploadMainImage);
-        $uploadImage->upload($initUploadMainImage, $tmpMainImagePath);
+        $tmpMainImagePath      = $uploadImage->tmpSaveImageFile($initUploadMainImage);
+        $thumbnailUploadStatus = $uploadImage->upload($initUploadMainImage, $tmpMainImagePath);
+        $thumbnailUploadStatus->waitUploadImage();
 
         return [
             'title'     => $this->faker->realText(random_int(10, 100)),
             'body'      => $this->faker->realText(random_int(10, 2000)),
-            'thumbnail' => $imageUrl->value(),
+            'thumbnail' => $imageStatus->waitUploadImage()->value(),
         ];
     }
 }

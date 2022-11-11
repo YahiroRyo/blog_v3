@@ -48,12 +48,12 @@ final class InProgressBlogService {
             Path::of($imageStoragePath->thumbnailStoragePath()),
             $initMainImage->fileName()
         );
-        $tmpThumbanilFilePath = $this->uploadImage->tmpSaveImageFile($initThumbnail);
-        $thumbnailImageUrl    = $this->uploadImage->upload($initThumbnail, $tmpThumbanilFilePath);
+        $tmpThumbanilFilePath       = $this->uploadImage->tmpSaveImageFile($initThumbnail);
+        $uploadThumbnailImageStatus = $this->uploadImage->upload($initThumbnail, $tmpThumbanilFilePath);
 
         $this->inProgressBlogMainImageRepository->editBlogIcon(
             $inProgressBlogMainImage,
-            ThumbnailUrl::of($thumbnailImageUrl->value())
+            ThumbnailUrl::of($uploadThumbnailImageStatus->waitUploadImage()->value())
         );
     }
 }
