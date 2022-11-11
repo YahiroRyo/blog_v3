@@ -7,18 +7,20 @@ use Packages\Domain\Aws\Image\ValueObjects\ImageUrl;
 
 final class UploadImageStatus {
     private ImageUrl $imageUrl;
-    private Promise $promise;
+    private ?Promise $promise;
 
     public function __construct(
         ImageUrl $imageUrl,
-        Promise $promise,
+        ?Promise $promise,
     ) {
         $this->imageUrl = $imageUrl;
         $this->promise  = $promise;
     }
 
     public function waitUploadImage(): ImageUrl {
-        $this->promise->wait();
+        if ($this->promise) {
+            $this->promise->wait();
+        }
 
         return $this->imageUrl;
     }

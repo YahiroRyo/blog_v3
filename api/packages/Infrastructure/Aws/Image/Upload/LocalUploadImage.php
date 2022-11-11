@@ -25,7 +25,7 @@ final class LocalUploadImage extends BaseUploadImage implements UploadImage {
 
         return new UploadImageStatus(
             ImageUrl::of(Storage::disk('public')->url($path)),
-            new Promise()
+            null
         );
     }
 }
