@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ClipboardEvent, ComponentProps, DragEvent, useRef } from 'react';
 import ReactCodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
+import { html } from '@codemirror/lang-html';
 import { languages } from '@codemirror/language-data';
 import { sublime } from '@uiw/codemirror-theme-sublime';
 
@@ -134,7 +135,7 @@ const Editor = ({ setValue, value, style }: EditorProps) => {
     <ReactCodeMirror
       css={style}
       value={value as string}
-      extensions={[markdown({ base: markdownLanguage, codeLanguages: languages })]}
+      extensions={[markdown({ base: markdownLanguage, codeLanguages: languages }), html()]}
       theme={sublime}
       onChange={(value) => {
         setValue(value);
