@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       props: {
         blogList: response.data,
       },
-      revalidate: 1000 * 60 * 60 * 24,
+      revalidate: 1000 * 60 * 60,
     };
   } catch (e) {
     console.error(e);
